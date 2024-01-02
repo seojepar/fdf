@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 17:12:03 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/02 17:36:20 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/02 17:46:45 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ int	fp(void	*par)
 // 	return (1);
 // }
 
+void	ft_switch(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 // bresenham
 void	draw_line(int x0, int y0, int x1, int y1)
 {
@@ -41,24 +50,36 @@ void	draw_line(int x0, int y0, int x1, int y1)
 	int		dx;
 	int		dy;
 	int		D;
+	int		tmp;
+	int		yi;
 
 	mlx_ptr = mlx_init ();
 	win_ptr = mlx_new_window(mlx_ptr, 200, 200, "Title");
 	mlx_pixel_put(mlx_ptr, win_ptr, 100, 100, 0xFFFFFF);
+	if (x0 > x1)
+	{
+		ft_switch(&x0, &x1);
+		ft_switch(&y0, &y1);
+	}
+
 	dx = x1 - x0;
 	dy = y1 - y0;
 	D = 2 * dy - dx;
+	yi = 0;
+	if (y1 < y0)
+		yi = -1;
 
 	while (x0 != x1)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, x0, y0 + (D > 0), 0xFFFFFF);
+		mlx_pixel_put(mlx_ptr, win_ptr, x0, y0 + yi * (D > 0), 0xFFFFFF);
 		x0++;
 		if (D > 0)
 		{
-			y0++;
+			y0 += 1 + yi;
 			D += dy - dx;
 		}
 		else
+			y0 += yi;
 			D += dy;
 	}
 	mlx_loop(mlx_ptr);
@@ -66,5 +87,6 @@ void	draw_line(int x0, int y0, int x1, int y1)
 
 int main()
 {
-	draw_line(10, 20, 70, 100);
+	draw_line(10, 100, 70, 0);
+	// draw_line(80, 20, 20, 100);
 }
