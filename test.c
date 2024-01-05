@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:42:15 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/05 15:43:33 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/05 21:02:20 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,33 @@ int	get_x(char **my)
 	return (x);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
-	int		fd;
-	int		x_max;
-	int		y_max;
-	char	**tmp;
-	char	*line;
+	int			fd;
+	int			x_max;
+	int			y_max;
+	char		**tmp;
+	char		*line;
+	const char	*filename;
 
+	printf("%d is the number of args", argc);
 	if (argc != 2)
 		return (0);
-	// fd = open(argv[1], O_RDONLY);
+	filename = (const char *)argv[1];
+	fd = open(filename, O_RDONLY);
 	y_max = 0;
 	x_max = 0;
-	printf("Hi");
-	// while (1)
-	// {
-	// 	line = get_next_line(fd);
-	// 	if (!line)
-	// 		break ;
-	// 	tmp = ft_split(line, ' ');
-	// 	free(line);
-	// 	x_max = get_x(tmp);
-	// 	free(tmp);
-	// 	y_max++;
-	// }
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		tmp = ft_split(line, ' ');
+		free(line);
+		x_max = get_x(tmp);
+		free(tmp);
+		y_max++;
+	}
 	printf("x is %d, y is %d", x_max, y_max);
-	// close(fd);
+	close(fd);
 }
