@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/09 18:32:10 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/09 21:11:40 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 #include <fcntl.h>
 
 typedef struct s_dot{
-	int		z;
-	char	*color;
-} t_dot
+	int	z;
+	int	color;
+}	t_dot;
 
 char	*ft_substr(char *start, char *end)
 {
 	char	*out;
 	int		i;
 
-	out = malloc(end - start + 2);
+	out = (char *)malloc(end - start + 2);
 	if (!out)
 		return (NULL);
 	i = 0;
@@ -38,10 +38,11 @@ char	*ft_substr(char *start, char *end)
 	return (out);
 }
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (!str)
 		return (0);
 	while (*(str + i))
@@ -80,21 +81,74 @@ char	*ft_strcat(char *s1, char *s2)
 	return (out);
 }
 
+int	ft_0xatoi(char *str)
+{
+	int	num;
+
+	num = -1;
+	while (*str)
+	{
+		str++;
+		if (!('0' <= *str && *str <= '9'))
+			break ;
+		if (*str == ',')
+		{
+			num = 0;
+			str += 3;
+			break ;
+		}
+	}
+	while (*str)
+	{
+		if ('0' <= *str && *str <= '9')
+			num = num * 16 + *str - '0';
+		else if ('A' <= *str && *str <= 'F')
+			num = num * 16 + *str - 'A' + 10;
+		else
+			break ;
+		str++;
+	}
+	return (num);
+}
+
+int	ft_atoi(char *str)
+{
+	int	flag;
+	int	num;
+
+	flag = 1;
+	if (*str == '+')
+		str++;
+	if (*str == '-')
+	{
+		flag = -1;
+		str++;
+	}
+	num = 0;
+	while ('0' <= *str && *str <= '9')
+	{
+		num = num * 10 + *str - '0';
+		str++;
+	}
+	return (num * flag);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd = open(argv[1], O_RDONLY);
 	int		nbyte = 1000;
 	char	*buf = malloc(nbyte + 1);
+	char	*tmp;
 	int		x;
 	int		y;
 	int		sp;
 
-	// 미해결: 버퍼사이즈가 부족한 경우 strcat을 통하여 계속해서 합치는 작업이 필요
 	read(fd, buf, nbyte);
+	tmp = buf;
 	x = 0;
 	y = 0;
 	sp = 1;
-	while(*buf)
+	while (*buf)
 	{
 		if (!sp && *buf == ' ' || *buf == '\n')
 			x++;
@@ -103,16 +157,33 @@ int	main(int argc, char *argv[])
 		sp = (*buf == ' ');
 		buf++;
 	}
-	x /= y;
-	printf("x is %d y is %d", x, y);
-	/*
-	파일을 파싱해서 내가 원하는 포맷대로 저장할 수 있어야 된다.
-	문제1: 파일 사이즈가 버퍼 사이즈를 넘어가게 되면? 계속 string을 합쳐서 하나의 string으로 만들어준다!
-
-	1> 하나의 겁나 큰 문자열로 저장하자.
-	2> 문자의 개수를 받자. \n의 개수를 세자.
-	3> 그만큼 할당을 하자.
-	4> split 쓰면서 바로 atoi 적용시켜서 숫자로 저장하자.
-	*/
-	// 구조체의 배열을 쓰자! point[x][y] 에 z랑, 색깔을 저장하는거야.
+	if (y != 0)
+		x /= y;
+	// x and y is done while this
+	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
+	int	i = 0;
+	int	j = 0;
+	while (j < x)
+		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
+	i = 0;
+	j = 0;
+	sp = 1;
+	while (*tmp)
+	{
+		if (sp && *tmp != ' ' && *tmp != '\n')
+		{
+			printf("i: %d, j: %d\n", i, j);
+			dots[i][j].z = ft_atoi(tmp);
+			dots[i][j].color = ft_0xatoi(tmp);
+			printf("z: %d, color: %d\n", dots[i][j].z, dots[i][j].color);
+			i++;
+		}
+		if (*tmp == '\n')
+		{
+			i = 0;
+			j++;
+		}
+		sp = (*tmp == ' ' || *tmp == '\n');
+		tmp++;
+	}
 }
