@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:24:14 by seojepar          #+#    #+#             */
-/*   Updated: 2024/01/05 14:32:05 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/09 16:35:55 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	j;
 
-	printf("start");
 	tmp = (char **)malloc(sizeof(char *) * (ft_wordcnt(s, c) + 1));
 	if (!tmp)
 		return (NULL);
