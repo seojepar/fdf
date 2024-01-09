@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:42:15 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/07 19:34:47 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/09 13:32:11 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,53 +43,50 @@ void	get_x_y(int fd, int *x, int *y)
 	}
 }
 
-void	set_point(int *point, int x_max, int y_max, int fd);
+int	**set_point(int x_max, int y_max, int fd)
 {
+	int		**point;
 	char	**tmp;
 	char	*line;
-	int		points;
 	int		x;
-	int 	y;
+	int		y;
 
-	x = 0;
+	point = (int **)malloc(sizeof(int) * x_max * y_max);
 	y = 0;
-	point = &points;
-	while (1)
+	while (y < y_max)
 	{
 		line = get_next_line(fd);
-		if (!line)
-			break ;
 		tmp = ft_split(line, ' ');
 		free(line);
 		x = 0;
-		while (*tmp)
+		while (x < x_max)
 		{
-			points[x][y] = ft_atoi(*tmp);
-			y++;
+			point[y][x] = ft_atoi(*tmp);
+			x++;
 			tmp++;
 		}
 		free(tmp);
-		x++;
+		y++;
 	}
+	return (point);
 }
 
 int	main(int argc, char *argv[])
 {
-	int			fd;
-	int			x_max;
-	int			y_max;
-	char		**tmp;
-	const char	*filename;
-	int			*point;
+	int		fd;
+	int		x_max;
+	int		y_max;
+	char	**tmp;
+	int		**points;
 
 	if (argc != 2)
 		return (0);
-	filename = (const char *)argv[1];
-	fd = open(filename, O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	get_x_y(fd, &x_max, &y_max);
-	close(fd);
-	point = (int *)malloc(sizeof(int) * x_max * y_max);
+	printf("x_max is :%d, y_max is :%d", x_max, y_max);
+	// close(fd);
+	// fd = open(argv[1], O_RDONLY);
+	// points = set_point(x_max, y_max, fd);
+	// close(fd);
 	
-	// 저번에도 그랬지만 이 파싱하는게 생각보다 까다롭다. 스트레스 받고.
-	// 중복해서 같은 작업을 두번 처리한다는 것도 뭔가 마음에 안든다.
 }
