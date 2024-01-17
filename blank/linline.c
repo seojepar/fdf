@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/17 17:18:02 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/17 17:21:59 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	plot_line_high(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 	dis = 2 * dx - dy;
 	while (d1.cy <= d2.cy)
 	{
-		printf("x is %d y is %d\n", d1.cx, d1.cy);
+		// printf("x is %d y is %d\n", d1.cx, d1.cy);
 		plot_dot(d1.cx, d1.cy++, mlx_ptr, win_ptr);
 		if (dis > 0)
 		{
@@ -70,7 +70,7 @@ void	plot_line_low(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 	dis = 2 * dy - dx;
 	while (d1.cx <= d2.cx)
 	{
-		printf("x is %d y is %d\n", d1.cx, d1.cy);
+		// printf("x is %d y is %d\n", d1.cx, d1.cy);
 		plot_dot(d1.cx++, d1.cy, mlx_ptr, win_ptr);
 		if (dis > 0)
 		{
@@ -100,19 +100,17 @@ void	plot_line(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 	}
 }
 
-int main()
-{
-	void	*mlx_ptr = mlx_init();
-	void	*win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Title");
-	t_dot	dotdot1;
-	t_dot	dotdot2;
+// int main()
+// {
+// 	void	*mlx_ptr = mlx_init();
+// 	void	*win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Title");
+// 	t_dot	dotdot1;
+// 	t_dot	dotdot2;
 
-	dotdot1.cx = 1;
-	dotdot1.cy = 800;
-	dotdot2.cx = 500;
-	dotdot2.cy = 200;
-	// y2 > y1 인 경우 작동하지 않는다.
-	printf("I am here\n");
-	plot_line(dotdot1, dotdot2, mlx_ptr, win_ptr);
-	mlx_loop(mlx_ptr);
-}
+// 	dotdot1.cx = 1;
+// 	dotdot1.cy = 800;
+// 	dotdot2.cx = 500;
+// 	dotdot2.cy = 200;
+// 	plot_line(dotdot1, dotdot2, mlx_ptr, win_ptr);
+// 	mlx_loop(mlx_ptr);
+// }

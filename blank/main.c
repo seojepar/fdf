@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/09 22:43:21 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/17 19:55:56 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #include <math.h>
 #include "mlx.h"
 #include "fdf.h"
-
-typedef struct s_dot{
-	int	cx; // current x
-	int	cy;
-	int	z;
-	int	color;
-}	t_dot;
-
-void	draw_dot(t_dot **dots, int x, int y);
 
 char	*ft_substr(char *start, char *end)
 {
@@ -131,6 +122,36 @@ int	ft_atoi(char **str)
 	return (num * flag);
 }
 
+void	draw_dot(t_dot **dots, int x, int y)
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int	scale = 40;
+	int	i = 0;
+	int j = 0;
+
+	mlx_ptr = mlx_init ();
+	win_ptr = mlx_new_window(mlx_ptr, 1200, 1200, "Power Code");
+	while (i < x)
+	{
+		j = 0;
+		while (j < y)
+		{
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 500;
+			dots[i][j].cy = (i + j) * scale / 2 + 300 - dots[i][j].z * 5;
+			if (dots[i][j].color < 0)
+				dots[i][j].color = 0xFFFFFF;
+			if (i > 0)
+				plot_line(dots[i - 1][j], dots[i][j], mlx_ptr, win_ptr);
+			if (j > 0)
+				plot_line(dots[i][j - 1], dots[i][j], mlx_ptr, win_ptr);
+			j++;
+		}
+		i++;
+	}
+	mlx_loop(mlx_ptr);
+}
+
 int	main(int argc, char *argv[])
 {
 	int		fd = open(argv[1], O_RDONLY);
@@ -157,7 +178,6 @@ int	main(int argc, char *argv[])
 	}
 	if (y != 0)
 		x /= y;
-	printf("%d %d", x, y);
 	// x and y is done while this
 	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
 	int	i = 0;
@@ -183,36 +203,5 @@ int	main(int argc, char *argv[])
 		sp = (*tmp == ' ' || *tmp == '\n');
 		tmp++;
 	}
-	printf("%d %d", x, y);
 	draw_dot(dots, x, y);
-}
-
-void	draw_dot(t_dot **dots, int x, int y)
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int	scale = 100;
-	int	i = 0;
-	int j = 0;
-
-
-	mlx_ptr = mlx_init ();
-	win_ptr = mlx_new_window(mlx_ptr, 1600, 1600, "Power Code");
-	while (i < x)
-	{
-		j = 0;
-		while (j < y)
-		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 700;
-			dots[i][j].cy = ((i + j) / 2 - dots[i][j].z) * scale + 500;
-			if (dots[i][j].color < 0)
-				dots[i][j].color = 0xFFFFFF;
-			// printf("%d %d\n", dx, dy);
-			mlx_pixel_put(mlx_ptr, win_ptr, dx, dy, dots[i][j].color);
-			draw_line()
-			j++;
-		}
-		i++;
-	}
-	mlx_loop(mlx_ptr);
 }
