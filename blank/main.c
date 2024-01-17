@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/17 19:55:56 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/17 21:25:28 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,18 @@ int	ft_atoi(char **str)
 	return (num * flag);
 }
 
+int	keyhandler(int key, void *param)
+{
+	return (key);
+}
+
 void	draw_dot(t_dot **dots, int x, int y)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int	scale = 40;
+	int	mx = 0;
+	int my = 0;
 	int	i = 0;
 	int j = 0;
 
@@ -137,8 +144,8 @@ void	draw_dot(t_dot **dots, int x, int y)
 		j = 0;
 		while (j < y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 500;
-			dots[i][j].cy = (i + j) * scale / 2 + 300 - dots[i][j].z * 5;
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 500 + mx;
+			dots[i][j].cy = (i + j) * scale / 2 + 300 - dots[i][j].z * 5 + my;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;
 			if (i > 0)
@@ -149,6 +156,10 @@ void	draw_dot(t_dot **dots, int x, int y)
 		}
 		i++;
 	}
+	if (mlx_key_hook(win_ptr, keyhandler, (void *)0) == 123)
+		mx -= 10;
+	if (mlx_key_hook(win_ptr, keyhandler, (void *)0) == 124)
+		mx += 10;
 	mlx_loop(mlx_ptr);
 }
 

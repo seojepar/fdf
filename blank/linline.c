@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linline.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/17 20:50:31 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/17 21:26:08 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	plot_dot(t_dot d, void *mlx_ptr, void *win_ptr)
 {
-	mlx_pixel_put(mlx_ptr, win_ptr, d.cx, d.cy, d.color);
+	mlx_pixel_put(mlx_ptr, win_ptr, d.cx, d.cy, 0xFFFFFF);
 }
 
 void	plot_line_high(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
@@ -98,24 +98,38 @@ void	plot_line(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 	}
 }
 
-int	fp(int button, int x, int y, void *param)
-{
-	printf("button:%d, x:%d, y:%d\n", button, x, y);
-	return (1);
-}
+// int	fp1(int button, int x, int y, void *param)
+// {
+// 	printf("mouse_hook: button:%d, x:%d, y:%d\n", button, x, y);
+// 	return (1);
+// }
 
-int main()
-{
-	void	*mlx_ptr = mlx_init();
-	void	*win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Title");
-	t_dot	dotdot1;
-	t_dot	dotdot2;
+// int	fp2(void *param)
+// {
+// 	printf("expose_hook: %s\n", param);
+// 	return (1);
+// }
 
-	dotdot1.cx = 1;
-	dotdot1.cy = 800;
-	dotdot2.cx = 500;
-	dotdot2.cy = 200;
-	plot_line(dotdot1, dotdot2, mlx_ptr, win_ptr);
-	mlx_loop(mlx_ptr);
-	mlx_mouse_hook(win_ptr, fp, (void *)0);
-}
+// int	fp3(int keycode, void *param)
+// {
+// 	printf("key is %d\n", keycode);
+// 	return (1);
+// }
+
+// int main()
+// {
+// 	void	*mlx_ptr = mlx_init();
+// 	void	*win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Title");
+// 	t_dot	dotdot1;
+// 	t_dot	dotdot2;
+
+// 	dotdot1.cx = 1;
+// 	dotdot1.cy = 800;
+// 	dotdot2.cx = 500;
+// 	dotdot2.cy = 200;
+// 	plot_line(dotdot1, dotdot2, mlx_ptr, win_ptr);
+// 	mlx_mouse_hook(win_ptr, fp1, (void *)0);
+// 	mlx_expose_hook(win_ptr, fp2, (void *)0);
+// 	mlx_key_hook(win_ptr, fp3, (void *)0);
+// 	mlx_loop(mlx_ptr);
+// }
