@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/17 21:25:28 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:17:10 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,23 @@ int	ft_atoi(char **str)
 	return (num * flag);
 }
 
-int	keyhandler(int key, void *param)
+int	key_handler(int key, void *arg)
 {
-	return (key);
+	t_ptr	tmp;
+
+	tmp = *((t_ptr *)arg);
+	if (key == 53)
+	{
+		mlx_destroy_window(tmp.mlx, tmp.win);
+		exit(1);
+	}
+	printf("%d key was pressed\n", key);
+	return (1);
 }
 
 void	draw_dot(t_dot **dots, int x, int y)
 {
-	void	*mlx_ptr;
+	t_ptr	ptr;
 	void	*win_ptr;
 	int	scale = 40;
 	int	mx = 0;
@@ -137,30 +146,39 @@ void	draw_dot(t_dot **dots, int x, int y)
 	int	i = 0;
 	int j = 0;
 
-	mlx_ptr = mlx_init ();
-	win_ptr = mlx_new_window(mlx_ptr, 1200, 1200, "Power Code");
+	ptr.mlx = mlx_init ();
+	ptr.img = mlx_new_image(ptr.mlx, 1200, 1200);
+	int	bpp, size_line, endian;
+	char	*rely_on_me = mlx_get_data_addr(ptr.img, &bpp, &size_line, &endian);
+	printf("%s", rely_on_me);
+	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 500, 500);
+	// printf("bits per pixel: %d\n size of line: %d\n endian: %d", bpp, size_line, endian);
+	/*
+	returns information about the created image, allowing a user to modify it later.
+	bits_per_pixel will be filled with the number of bits needed to represent a pixel color (also called the depth of the image).
+	size_line is the number of bytes used to store one line of the image in memory.  This information is needed to move from one line to another in the image. 
+	endian tells you wether the pixel color in the image needs to be stored in little endian ( endian == 0), or big endian ( endian == 1).
+	*/
+	ptr.win = mlx_new_window(ptr.mlx, 1200, 1200, "Power Code");
 	while (i < x)
 	{
 		j = 0;
 		while (j < y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 500 + mx;
-			dots[i][j].cy = (i + j) * scale / 2 + 300 - dots[i][j].z * 5 + my;
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * scale + 500;
+			dots[i][j].cy = (i + j) * scale / 2 + 300 - dots[i][j].z * 3.5;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;
 			if (i > 0)
-				plot_line(dots[i - 1][j], dots[i][j], mlx_ptr, win_ptr);
+				plot_line(dots[i - 1][j], dots[i][j], ptr);
 			if (j > 0)
-				plot_line(dots[i][j - 1], dots[i][j], mlx_ptr, win_ptr);
+				plot_line(dots[i][j - 1], dots[i][j], ptr);
 			j++;
 		}
 		i++;
 	}
-	if (mlx_key_hook(win_ptr, keyhandler, (void *)0) == 123)
-		mx -= 10;
-	if (mlx_key_hook(win_ptr, keyhandler, (void *)0) == 124)
-		mx += 10;
-	mlx_loop(mlx_ptr);
+	mlx_key_hook (ptr.win, key_handler, &ptr);
+	mlx_loop(ptr.mlx);
 }
 
 int	main(int argc, char *argv[])
