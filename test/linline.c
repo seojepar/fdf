@@ -6,43 +6,45 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/18 19:17:59 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/18 20:52:19 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-void	plot_dot(t_dot d, void *mlx_ptr, void *win_ptr)
+void	plot_dot(t_dot d, t_ptr ptr)
 {
-	mlx_pixel_put(mlx_ptr, win_ptr, d.cx, d.cy, 0xFFFFFF);
+	mlx_pixel_put(ptr.mlx, ptr.win, d.cx, d.cy, d.color);
 }
 
-void	plot_line_high(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
+void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
 {
-	int	dx;
-	int	dy;
-	int	xi;
-	int	dis;
+	t_dot	dc;
+	int		dx;
+	int		dy;
+	int		xi;
+	int		dis;
 
 	dx = d2.cx - d1.cx;
 	dy = d2.cy - d1.cy;
 	xi = 1;
+	dc.cx = d1.cx;
+	dc.cy = d1.cy;
 	if (dx < 0)
 	{
 		xi = -1;
 		dx = -dx;
 	}
 	dis = 2 * dx - dy;
-	while (d1.cy <= d2.cy)
+	while (dc.cy <= d2.cy)
 	{
-		plot_dot(d1, mlx_ptr, win_ptr);
-		d1.cy++;
+		dc.color = ((d2.cy - dc.cy) * d1.color + (dc.cy - d1.cy) * d2.color) / (d2.cy - d1.cy);
+		plot_dot(dc, ptr);
+		dc.cy++;
 		if (dis > 0)
 		{
-			d1.cx = d1.cx + xi;
+			dc.cx = dc.cx + xi;
 			dis = dis + 2 * (dx - dy);
 		}
 		else
@@ -50,12 +52,13 @@ void	plot_line_high(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 	}
 }
 
-void	plot_line_low(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
+void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
 {
-	int	dx;
-	int	dy;
-	int	yi;
-	int	dis;
+	t_dot	dc;
+	int		dx;
+	int		dy;
+	int		yi;
+	int		dis;
 
 	dx = d2.cx - d1.cx;
 	dy = d2.cy - d1.cy;
@@ -66,13 +69,16 @@ void	plot_line_low(t_dot d1, t_dot d2, void *mlx_ptr, void *win_ptr)
 		dy = -dy;
 	}
 	dis = 2 * dy - dx;
-	while (d1.cx <= d2.cx)
+	dc.cx = d1.cx;
+	dc.cy = d1.cy;
+	while (dc.cx <= d2.cx)
 	{
-		plot_dot(d1, mlx_ptr, win_ptr);
-		d1.cx++;
+		dc.color = ((d2.cx - dc.cx) * d1.color + (dc.cx - d1.cx) * d2.color) / (d2.cx - d1.cx);
+		plot_dot(dc, ptr);
+		dc.cx++;
 		if (dis > 0)
 		{
-			d1.cy = d1.cy + yi;
+			dc.cy = dc.cy + yi;
 			dis = dis + 2 * (dy - dx);
 		}
 		else
@@ -85,37 +91,15 @@ void	plot_line(t_dot d1, t_dot d2, t_ptr ptr)
 	if (abs(d1.cx - d2.cx) < abs(d1.cy - d2.cy))
 	{
 		if (d1.cy > d2.cy)
-			plot_line_high(d2, d1, ptr.mlx, ptr.win);
+			plot_line_high(d2, d1, ptr);
 		else
-			plot_line_high(d1, d2, ptr.mlx, ptr.win);
+			plot_line_high(d1, d2, ptr);
 	}
 	else
 	{
 		if (d1.cx > d2.cx)
-			plot_line_low(d2, d1, ptr.mlx, ptr.win);
+			plot_line_low(d2, d1, ptr);
 		else
-			plot_line_low(d1, d2, ptr.mlx, ptr.win);
+			plot_line_low(d1, d2, ptr);
 	}
 }
-
-// int	fp1(int button, int x, int y, void *param)
-// {
-// 	printf("mouse_hook: button:%d, x:%d, y:%d\n", button, x, y);
-// 	return (1);
-// }
-
-// int main()
-// {
-// 	void	*mlx_ptr = mlx_init();
-// 	void	*win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "Title");
-// 	t_dot	dotdot1;
-// 	t_dot	dotdot2;
-
-// 	dotdot1.cx = 1;
-// 	dotdot1.cy = 800;
-// 	dotdot2.cx = 500;
-// 	dotdot2.cy = 200;
-// 	plot_line(dotdot1, dotdot2, mlx_ptr, win_ptr);
-// 	mlx_loop(mlx_ptr);
-// 	mlx_mouse_hook(win_ptr, fp, (void *)0);
-// }
