@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/18 20:52:19 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/01/19 18:41:53 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	plot_dot(t_dot d, t_ptr ptr)
 {
-	mlx_pixel_put(ptr.mlx, ptr.win, d.cx, d.cy, d.color);
+	// mlx_pixel_put(ptr.mlx, ptr.win, d.cx, d.cy, d.color);
+	img_pixel_put(ptr, d.cx, d.cy, d.color);
 }
 
 void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
