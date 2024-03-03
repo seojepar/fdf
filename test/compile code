@@ -1,0 +1,1 @@
+cc main.c utils.c linline.c -I ./minilibx_macos -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit && ./a.out ./test_maps/42.fdf
