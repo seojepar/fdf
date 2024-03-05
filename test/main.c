@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/05 13:52:29 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:36:51 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,40 @@ int	key_handler(int key, void *arg)
 	printf("%d key was pressed\n", key);
 	return (1);
 }
+void	ft_get_xy(char *file, int *x, int *y)
+{
+	int	sp;
+
+	*x = 0;
+	*y = 0;
+	sp = 1;
+
+	while (*file)
+	{
+		if (!sp && *file == ' ' || *file == '\n')
+			(*x)++;
+		if (*file == '\n')
+			(*y)++;
+		sp = (*file == ' ');
+		file++;
+	}
+	if ((*y) != 0)
+		(*x) /= (*y);
+}
 
 int	main(int argc, char *argv[])
 {
 	// 버퍼에 한번에 불러온다.
-	char	*buf = ft_read(open(argv[1], O_RDONLY));
-	printf("buf is:\n%s", buf);
+	char	*buf;
+	buf = ft_read(open(argv[1], O_RDONLY));
+	printf("%s", buf);
 
-	// x와 y의 개수를 파악한다.
-	int	x = 0;
-	int	y = 0;
-	int	sp = 1;
-	while (*buf)
-	{
-		if (!sp && *buf == ' ' || *buf == '\n')
-			x++;
-		if (*buf == '\n')
-			y++;
-		sp = (*buf == ' ');
-		buf++;
-	}
-	if (y != 0)
-		x /= y;
-	printf("\nx is %d, y is %d", x, y);
+	// x와 y 가져오기
+	// int	x;
+	// int	y;
+	// ft_get_xy(buf, &x, &y);
+	// printf("\nx is %d, y is %d\n", x, y);
+	
 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
 	// t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
@@ -84,25 +95,23 @@ int	main(int argc, char *argv[])
 	// int	j = 0;
 	// while (j < x)
 	// 	dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
-	// i = 0;
-	// j = 0;
-	// sp = 1;
-	// char	*tmp = buf;
-	// while (*tmp)
+	// int	sp = 1;
+	// while (*buf)
 	// {
-	// 	if (sp && *tmp != ' ' && *tmp != '\n')
+	// 	if (sp && *buf != ' ' && *buf != '\n')
 	// 	{
-	// 		dots[i][j].z = ft_atoi(&tmp);
-	// 		dots[i][j].color = ft_0xatoi(tmp);
+	// 		dots[i][j].z = ft_atoi(&buf);
+	// 		dots[i][j].color = ft_0xatoi(buf);
+	// 		// printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
 	// 		i++;
 	// 	}
-	// 	if (*tmp == '\n')
+	// 	if (*buf == '\n')
 	// 	{
 	// 		i = 0;
 	// 		j++;
 	// 	}
-	// 	sp = (*tmp == ' ' || *tmp == '\n');
-	// 	tmp++;
+	// 	sp = (*buf == ' ' || *buf == '\n');
+	// 	buf++;
 	// }
 
 	// // 점을 찍고 이웃한 점을 연결하자.

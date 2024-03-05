@@ -19,6 +19,10 @@ test_output/%.out: test_maps/%.fdf
 clean:
 	rm -f $(TARGET)
 
-re:
+fclean:
 	make clean
+	rm -f $(TEST_OUTPUTS)
+
+re:
+	make fclean
 	make all
