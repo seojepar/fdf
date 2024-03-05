@@ -2,7 +2,7 @@ SRC = main.c linline.c read_file.c utils.c
 TARGET = fdf
 INC = ./minilibx_macos
 CC = cc
-CFLAGS = -lmlx -framework OpenGL -framework AppKit && ./a.out ./test_maps/42.fdf
+CFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 
 all: $(TARGET)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/19 18:53:23 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/05 13:45:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr);
 void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr);
 void	plot_line(t_dot d1, t_dot d2, t_ptr ptr);
 void	img_pixel_put(t_ptr ptr, int x, int y, int color);
+
+char	*ft_strjoin(char *a, char *b);
+char	*ft_read(int fd);
 
 #endif

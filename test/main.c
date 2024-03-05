@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/02 16:09:59 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:52:29 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,14 @@ int	key_handler(int key, void *arg)
 
 int	main(int argc, char *argv[])
 {
-	int		fd = open(argv[1], O_RDONLY);
-	int		nbyte = 1000;
-	char	*buf = malloc(nbyte + 1);
-	char	*tmp;
-	int		x;
-	int		y;
-	int		sp;
-	t_ptr	ptr;
-
 	// 버퍼에 한번에 불러온다.
-	read(fd, buf, nbyte);
+	char	*buf = ft_read(open(argv[1], O_RDONLY));
+	printf("buf is:\n%s", buf);
 
 	// x와 y의 개수를 파악한다.
-	tmp = buf;
-	x = 0;
-	y = 0;
-	sp = 1;
+	int	x = 0;
+	int	y = 0;
+	int	sp = 1;
 	while (*buf)
 	{
 		if (!sp && *buf == ' ' || *buf == '\n')
@@ -85,35 +76,38 @@ int	main(int argc, char *argv[])
 	}
 	if (y != 0)
 		x /= y;
+	printf("\nx is %d, y is %d", x, y);
 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
-	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
-	int	i = 0;
-	int	j = 0;
-	while (j < x)
-		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
-	i = 0;
-	j = 0;
-	sp = 1;
-	while (*tmp)
-	{
-		if (sp && *tmp != ' ' && *tmp != '\n')
-		{
-			dots[i][j].z = ft_atoi(&tmp);
-			dots[i][j].color = ft_0xatoi(tmp);
-			i++;
-		}
-		if (*tmp == '\n')
-		{
-			i = 0;
-			j++;
-		}
-		sp = (*tmp == ' ' || *tmp == '\n');
-		tmp++;
-	}
+	// t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
+	// int	i = 0;
+	// int	j = 0;
+	// while (j < x)
+	// 	dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
+	// i = 0;
+	// j = 0;
+	// sp = 1;
+	// char	*tmp = buf;
+	// while (*tmp)
+	// {
+	// 	if (sp && *tmp != ' ' && *tmp != '\n')
+	// 	{
+	// 		dots[i][j].z = ft_atoi(&tmp);
+	// 		dots[i][j].color = ft_0xatoi(tmp);
+	// 		i++;
+	// 	}
+	// 	if (*tmp == '\n')
+	// 	{
+	// 		i = 0;
+	// 		j++;
+	// 	}
+	// 	sp = (*tmp == ' ' || *tmp == '\n');
+	// 	tmp++;
+	// }
 
-	// 점을 찍고 이웃한 점을 연결하자.
-	draw_dot(ptr, dots, x, y);
+	// // 점을 찍고 이웃한 점을 연결하자.
+	// t_ptr	ptr;
+	// draw_dot(ptr, dots, x, y);
 }
 
 void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
