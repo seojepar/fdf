@@ -33,6 +33,7 @@ char	*ft_strjoin(char *a, char *b)
 		*(out + i + j) = *(b + j);
 		j++;
 	}
+	*(out + i + j) = '\0';
 	free(a);
 	return (out);
 }
