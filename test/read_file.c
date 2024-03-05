@@ -46,9 +46,6 @@ char	*ft_read(int fd)
 	int i = 0;
 	while (read(fd, buf, n) > 0)
 	{
-		printf("%d\n", i);
-		i++;
-		printf("read is %zd\n", read(fd, buf, n));
 		out = ft_strjoin(out, buf);
 		free(buf);
 		buf = malloc(n);
