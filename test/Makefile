@@ -3,12 +3,18 @@ TARGET = fdf
 INC = ./minilibx_macos
 CC = cc
 CFLAGS = -lmlx -framework OpenGL -framework AppKit
-
+TEST_FILES := $(wildcard test_maps/*.fdf)
+TEST_OUTPUTS := $(TEST_FILES:test_maps/%.fdf=test_output/%.out)
 
 all: $(TARGET)
 
 $(TARGET): $(SRC)
 	$(CC) -o $@ $^ -I $(INC) -L $(INC) $(CFLAGS)
+
+test: $(TEST_OUTPUTS)
+
+test_output/%.out: test_maps/%.fdf
+	./$(TARGET) $< > $@
 
 clean:
 	rm -f $(TARGET)
