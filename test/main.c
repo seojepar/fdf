@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/05 21:37:29 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:06:24 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_get_xy(char *file, int *x, int *y)
 
 	while (*file)
 	{
-		if (!sp && *file == ' ' || *file == '\n')
+		if (!sp && (*file == ' ' || *file == '\n'))
 			(*x)++;
 		if (*file == '\n')
 			(*y)++;
@@ -85,32 +85,32 @@ int	main(int argc, char *argv[])
 	int	x;
 	int	y;
 	ft_get_xy(buf, &x, &y);
-	printf("\nx is %d, y is %d\n", x, y);
 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
-	// t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
-	// int	i = 0;
-	// int	j = 0;
-	// while (j < x)
-	// 	dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
-	// int	sp = 1;
-	// while (*buf)
-	// {
-	// 	if (sp && *buf != ' ' && *buf != '\n')
-	// 	{
-	// 		dots[i][j].z = ft_atoi(&buf);
-	// 		dots[i][j].color = ft_0xatoi(buf);
-	// 		// printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
-	// 		i++;
-	// 	}
-	// 	if (*buf == '\n')
-	// 	{
-	// 		i = 0;
-	// 		j++;
-	// 	}
-	// 	sp = (*buf == ' ' || *buf == '\n');
-	// 	buf++;
-	// }
+	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
+	int	i = 0;
+	int	j = 0;
+	while (j < x)
+		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
+	int	sp = 1;
+	printf("buf:\n%s\n, x:%d, y:%d", buf, x, y);
+	while (*buf)
+	{
+		if (sp && *buf != ' ' && *buf != '\n')
+		{
+			dots[i][j].z = ft_atoi(&buf);
+			dots[i][j].color = ft_0xatoi(buf);
+			// printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
+			i++;
+		}
+		if (*buf == '\n')
+		{
+			i = 0;
+			j++;
+		}
+		sp = (*buf == ' ' || *buf == '\n');
+		buf++;
+	}
 
 	// // 점을 찍고 이웃한 점을 연결하자.
 	// t_ptr	ptr;
