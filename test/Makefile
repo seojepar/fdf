@@ -1,7 +1,7 @@
 SRC = main.c linline.c read_file.c utils.c
 TARGET = fdf
 INC = ./minilibx_macos
-CC = cc
+CC = cc -g -fsanitize=address
 CFLAGS = -lmlx -framework OpenGL -framework AppKit
 TEST_FILES := $(wildcard test_maps/*.fdf)
 TEST_OUTPUTS := $(TEST_FILES:test_maps/%.fdf=test_output/%.out)

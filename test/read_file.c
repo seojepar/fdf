@@ -5,32 +5,33 @@
 
 #include "fdf.h"
 
+// a=out, b=buf
 char	*ft_strjoin(char *a, char *b)
 {
 	int		len;
-	char	*out;
+	char	*ret;
 	int		i;
 	int		j;
 
-	out = malloc(ft_strlen(a) + ft_strlen(b) + 1);
+	ret = malloc(ft_strlen(a) + ft_strlen(b) + 1);
 	// 코딩에서 지금 널가드가 하나도 안되어있다.
-	if (!out)
+	if (!ret)
 		return (NULL);
 	i = 0;
 	while (*(a + i))
 	{
-		*(out + i) = *(a + i);
+		*(ret + i) = *(a + i);
 		i++;
 	}
 	j = 0;
 	while (*(b + j))
 	{
-		*(out + i + j) = *(b + j);
+		*(ret + i + j) = *(b + j);
 		j++;
 	}
-	*(out + i + j) = '\0';
+	*(ret + i + j) = '\0';
 	free(a);
-	return (out);
+	return (ret);
 }
 
 char	*ft_read(int fd)
@@ -42,13 +43,17 @@ char	*ft_read(int fd)
 	out = malloc(1);
 	*out = '\0';
 	// read 함수 사용하기 전에 초기화 안해서 쓰레기값까지 다 들어갔었다.
-	buf = malloc(n);
-	int i = 0;
-	while (read(fd, buf, n) > 0)
+	buf = malloc(n + 1);
+	while (1)
 	{
+		int len = read(fd, buf, n);
+		if (len <= 0)
+			break;
+		// read는 널을 보장해주지 않는다 - sgang
+		buf[len] = '\0';
 		out = ft_strjoin(out, buf);
-		free(buf);
-		buf = malloc(n);
+		// free(buf);
+		// buf = malloc(n);
 	}
 	free(buf);
 	return (out);

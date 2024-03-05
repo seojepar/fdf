@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/05 21:36:51 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:37:29 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,12 @@ int	main(int argc, char *argv[])
 	// 버퍼에 한번에 불러온다.
 	char	*buf;
 	buf = ft_read(open(argv[1], O_RDONLY));
-	printf("%s", buf);
 
 	// x와 y 가져오기
-	// int	x;
-	// int	y;
-	// ft_get_xy(buf, &x, &y);
-	// printf("\nx is %d, y is %d\n", x, y);
-	
+	int	x;
+	int	y;
+	ft_get_xy(buf, &x, &y);
+	printf("\nx is %d, y is %d\n", x, y);
 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
 	// t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
