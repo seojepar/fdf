@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 17:33:46 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:45:26 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,20 @@ void	img_pixel_put(t_ptr ptr, int x, int y, int color)
 
 int	key_handler(int key, void *arg)
 {
-	t_ptr	tmp;
+	t_ptr	*tmp;
 
-	tmp = *((t_ptr *)arg);
+	tmp = ((t_ptr *)arg);
 	if (key == ESC)
 	{
-		mlx_destroy_window(tmp.mlx, tmp.win);
+		mlx_destroy_window(tmp->mlx, tmp->win);
 		exit(1);
+	}
+	if (key == LEFT)
+	{
+		mlx_clear_window(tmp->mlx, tmp->win);
+		tmp->x--;
+		mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
+		printf("{%d %d}\n", tmp->x, tmp->y);
 	}
 	printf("%d key was pressed\n", key);
 	return (1);
@@ -135,7 +142,6 @@ int	main(int argc, char *argv[])
 		buf++;
 	}
 
-	// 점을 찍고 이웃한 점을 연결하자.
 	t_ptr	ptr;
 	draw_dot(ptr, dots, x, y);
 }
@@ -148,13 +154,12 @@ void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 	int		i = 0;
 	int 	j = 0;
 
-	// 점을 그릴 기본창을 선언한다.
 	ptr.mlx = mlx_init();
 	ptr.win = mlx_new_window(ptr.mlx, 1200, 1200, "Power Code");
 	ptr.img = mlx_new_image(ptr.mlx, 1200, 1200);
 	ptr.buf = mlx_get_data_addr(ptr.img, &ptr.pix, &ptr.line, &ptr.end);
-	// buffer: single array of width * height * 4 bytes. For a 500x500 image, we would need 1’000’000 bytes or about 0.953 MB.
-	// edit buffer: set each pixel's color value by bit calculation.
+	ptr.x = 0;
+	ptr.y = 0;
 	while (i < x)
 	{
 		j = 0;
@@ -172,7 +177,7 @@ void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 0, 0);
+	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, ptr.x, ptr.y);
 	mlx_key_hook(ptr.win, key_handler, &ptr);
 	mlx_loop(ptr.mlx);
 }
