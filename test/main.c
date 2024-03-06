@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 09:02:24 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:41:29 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,26 @@ int	key_handler(int key, void *arg)
 	printf("%d key was pressed\n", key);
 	return (1);
 }
+
 void	ft_get_xy(char *file, int *x, int *y)
 {
-	int	sp;
-
-	*x = 0;
-	*y = 0;
-	sp = 1;
+	int	sp = 1;
+	int cnum = 0;
+	int line = 0;
 
 	while (*file)
 	{
-		if (!sp && (*file == ' ' || *file == '\n'))
-			(*x)++;
+		if (sp && !((*file == ' ') || (*file == '\n')))
+			cnum++;
 		if (*file == '\n')
-			(*y)++;
-		sp = (*file == ' ');
+			line++;
+		sp = ((*file == ' ') || (*file == '\n'));
 		file++;
 	}
-	if ((*y) != 0)
-		(*x) /= (*y);
+	if (*(file - 1) != '\n')
+		line++;
+	*x = cnum / line;
+	*y = line;
 }
 
 int	main(int argc, char *argv[])
@@ -80,12 +81,14 @@ int	main(int argc, char *argv[])
 	// 버퍼에 한번에 불러온다.
 	char	*buf;
 	buf = ft_read(open(argv[1], O_RDONLY));
+	printf("%s", buf);
 
 	// x와 y 가져오기
 	int	x;
 	int	y;
 	ft_get_xy(buf, &x, &y);
-
+	printf("x: %d, y: %d\n", x, y);
+ 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
 	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
 	int	i = 0;
@@ -93,6 +96,7 @@ int	main(int argc, char *argv[])
 	while (j < x)
 		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
 	int	sp = 1;
+	j = 0;
 	while (*buf)
 	{
 		if (sp && *buf != ' ' && *buf != '\n')

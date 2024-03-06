@@ -1,0 +1,111 @@
+0  0  0  0  0  0  0  0  0  0
+0 10 10 10 10 10 10 10 10  0
+0 10 20,0xFF0000 15,0xFF0000 12 15,0xFF0000 17,0xFF0000 20,0xFF0000 10  0
+0 10 15,0xFF0000 10 12 15,0xFF0000 15,0xFF0000 15,0xFF0000 10  0
+0  5 15,0xFF0000 10 12 15,0xFF0000 15,0xFF0000 13 10  0
+0  5 10  5  7 12 12 12 10  0
+0  5  7  1  2  7  5  5  7  0
+0  3  0  0  1  2  2  2  5  0
+0  1  0  0  0  0  0  0  3  0
+0  0  0  0  0  0  0  0  0  0
+x: 10, y: 10
+i: 0, j: 0, z: 0, color:-1
+i: 1, j: 0, z: 0, color:-1
+i: 2, j: 0, z: 0, color:-1
+i: 3, j: 0, z: 0, color:-1
+i: 4, j: 0, z: 0, color:-1
+i: 5, j: 0, z: 0, color:-1
+i: 6, j: 0, z: 0, color:-1
+i: 7, j: 0, z: 0, color:-1
+i: 8, j: 0, z: 0, color:-1
+i: 9, j: 0, z: 0, color:-1
+i: 0, j: 1, z: 0, color:-1
+i: 1, j: 1, z: 10, color:-1
+i: 2, j: 1, z: 10, color:-1
+i: 3, j: 1, z: 10, color:-1
+i: 4, j: 1, z: 10, color:-1
+i: 5, j: 1, z: 10, color:-1
+i: 6, j: 1, z: 10, color:-1
+i: 7, j: 1, z: 10, color:-1
+i: 8, j: 1, z: 10, color:-1
+i: 9, j: 1, z: 0, color:-1
+i: 0, j: 2, z: 0, color:-1
+i: 1, j: 2, z: 10, color:-1
+i: 2, j: 2, z: 20, color:0
+i: 3, j: 2, z: 15, color:0
+i: 4, j: 2, z: 12, color:-1
+i: 5, j: 2, z: 15, color:0
+i: 6, j: 2, z: 17, color:0
+i: 7, j: 2, z: 20, color:0
+i: 8, j: 2, z: 10, color:-1
+i: 9, j: 2, z: 0, color:-1
+i: 0, j: 3, z: 0, color:-1
+i: 1, j: 3, z: 10, color:-1
+i: 2, j: 3, z: 15, color:0
+i: 3, j: 3, z: 10, color:-1
+i: 4, j: 3, z: 12, color:-1
+i: 5, j: 3, z: 15, color:0
+i: 6, j: 3, z: 15, color:0
+i: 7, j: 3, z: 15, color:0
+i: 8, j: 3, z: 10, color:-1
+i: 9, j: 3, z: 0, color:-1
+i: 0, j: 4, z: 0, color:-1
+i: 1, j: 4, z: 5, color:-1
+i: 2, j: 4, z: 15, color:0
+i: 3, j: 4, z: 10, color:-1
+i: 4, j: 4, z: 12, color:-1
+i: 5, j: 4, z: 15, color:0
+i: 6, j: 4, z: 15, color:0
+i: 7, j: 4, z: 13, color:-1
+i: 8, j: 4, z: 10, color:-1
+i: 9, j: 4, z: 0, color:-1
+i: 0, j: 5, z: 0, color:-1
+i: 1, j: 5, z: 5, color:-1
+i: 2, j: 5, z: 10, color:-1
+i: 3, j: 5, z: 5, color:-1
+i: 4, j: 5, z: 7, color:-1
+i: 5, j: 5, z: 12, color:-1
+i: 6, j: 5, z: 12, color:-1
+i: 7, j: 5, z: 12, color:-1
+i: 8, j: 5, z: 10, color:-1
+i: 9, j: 5, z: 0, color:-1
+i: 0, j: 6, z: 0, color:-1
+i: 1, j: 6, z: 5, color:-1
+i: 2, j: 6, z: 7, color:-1
+i: 3, j: 6, z: 1, color:-1
+i: 4, j: 6, z: 2, color:-1
+i: 5, j: 6, z: 7, color:-1
+i: 6, j: 6, z: 5, color:-1
+i: 7, j: 6, z: 5, color:-1
+i: 8, j: 6, z: 7, color:-1
+i: 9, j: 6, z: 0, color:-1
+i: 0, j: 7, z: 0, color:-1
+i: 1, j: 7, z: 3, color:-1
+i: 2, j: 7, z: 0, color:-1
+i: 3, j: 7, z: 0, color:-1
+i: 4, j: 7, z: 1, color:-1
+i: 5, j: 7, z: 2, color:-1
+i: 6, j: 7, z: 2, color:-1
+i: 7, j: 7, z: 2, color:-1
+i: 8, j: 7, z: 5, color:-1
+i: 9, j: 7, z: 0, color:-1
+i: 0, j: 8, z: 0, color:-1
+i: 1, j: 8, z: 1, color:-1
+i: 2, j: 8, z: 0, color:-1
+i: 3, j: 8, z: 0, color:-1
+i: 4, j: 8, z: 0, color:-1
+i: 5, j: 8, z: 0, color:-1
+i: 6, j: 8, z: 0, color:-1
+i: 7, j: 8, z: 0, color:-1
+i: 8, j: 8, z: 3, color:-1
+i: 9, j: 8, z: 0, color:-1
+i: 0, j: 9, z: 0, color:-1
+i: 1, j: 9, z: 0, color:-1
+i: 2, j: 9, z: 0, color:-1
+i: 3, j: 9, z: 0, color:-1
+i: 4, j: 9, z: 0, color:-1
+i: 5, j: 9, z: 0, color:-1
+i: 6, j: 9, z: 0, color:-1
+i: 7, j: 9, z: 0, color:-1
+i: 8, j: 9, z: 0, color:-1
+i: 9, j: 9, z: 0, color:-1
