@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 18:45:26 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:57:22 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,36 @@ int	key_handler(int key, void *arg)
 		exit(1);
 	}
 	if (key == LEFT)
-	{
-		mlx_clear_window(tmp->mlx, tmp->win);
 		tmp->x--;
-		mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
-		printf("{%d %d}\n", tmp->x, tmp->y);
-	}
-	printf("%d key was pressed\n", key);
+	if (key == RIGHT)
+		tmp->x++;
+	if (key == UP)
+		tmp->y--;
+	if (key == DOWN)
+		tmp->y++;	
+	mlx_clear_window(tmp->mlx, tmp->win);
+	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
+	return (1);
+}
+
+int	mouse_handler(int button, int x, int y, void *param)
+{
+	t_ptr	*tmp;
+
+	tmp = (t_ptr *)param;
+	printf("button: %d, x: %d, y: %d\n", button, x, y);
+	if (button == 5)
+		tmp->y--;
+	if (button == 4)
+		tmp->y++;
+	mlx_clear_window(tmp->mlx, tmp->win);
+	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
+	return (1);
+}
+
+int	expose_handler(void *param)
+{
+	printf("Expose handler was called");
 	return (1);
 }
 
@@ -179,5 +202,7 @@ void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 	}
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, ptr.x, ptr.y);
 	mlx_key_hook(ptr.win, key_handler, &ptr);
+	mlx_mouse_hook(ptr.win, mouse_handler, &ptr);
+	mlx_expose_hook(ptr.win, expose_handler, &ptr);
 	mlx_loop(ptr.mlx);
 }
