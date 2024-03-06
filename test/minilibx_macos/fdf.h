@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/05 13:45:17 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:11:35 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define RIGHT 124
 # define UP 126
 # define DOWN 125
+# define INPUT_ERR 0
+# define RET_SUC 1
+# define RET_ERR 0
 
 typedef struct s_ptr{
 	void	*mlx;

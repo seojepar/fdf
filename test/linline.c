@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linline.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/19 18:41:53 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/06 17:32:59 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 void	plot_dot(t_dot d, t_ptr ptr)
 {
 	// mlx_pixel_put(ptr.mlx, ptr.win, d.cx, d.cy, d.color);
-	img_pixel_put(ptr, d.cx, d.cy, d.color);
+	if (d.cx >= 0 && d.cy >= 0)
+		img_pixel_put(ptr, d.cx, d.cy, d.color);
 }
 
 void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
@@ -89,6 +90,8 @@ void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
 
 void	plot_line(t_dot d1, t_dot d2, t_ptr ptr)
 {
+	if ((d1.cx < 0 && d2.cx <0) || (d1.cy < 0 && d2.cy < 0))
+		return ;
 	if (abs(d1.cx - d2.cx) < abs(d1.cy - d2.cy))
 	{
 		if (d1.cy > d2.cy)

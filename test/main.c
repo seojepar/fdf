@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 12:41:29 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:33:46 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,45 @@ int	key_handler(int key, void *arg)
 	return (1);
 }
 
-void	ft_get_xy(char *file, int *x, int *y)
+int	ft_get_xy(char *file, int *x, int *y)
 {
-	int	sp = 1;
-	int cnum = 0;
-	int line = 0;
+	int	is_sp = 1;
+	int	first_row_count = 0;
+	int	other_row_count = 0;
+	int	total_count;
 
 	while (*file)
 	{
-		if (sp && !((*file == ' ') || (*file == '\n')))
-			cnum++;
+		if (is_sp && !((*file == ' ') || (*file == '\n')))
+			first_row_count++;
+		is_sp = ((*file == ' ') || (*file == '\n'));
 		if (*file == '\n')
-			line++;
-		sp = ((*file == ' ') || (*file == '\n'));
+		{
+			file++;
+			break;
+		}
 		file++;
 	}
-	if (*(file - 1) != '\n')
-		line++;
-	*x = cnum / line;
-	*y = line;
+	total_count = first_row_count;
+	while (*file)
+	{
+		if (is_sp && !((*file == ' ') || (*file == '\n')))
+		{
+			other_row_count++;
+			total_count++;
+		}
+		if (*file == '\n')
+		{
+			if (other_row_count != first_row_count)
+				return (INPUT_ERR);
+			other_row_count = 0;
+		}
+		is_sp = ((*file == ' ') || (*file == '\n'));
+		file++;
+	}
+	*x = first_row_count;
+	*y = total_count / first_row_count;
+	return (RET_SUC);
 }
 
 int	main(int argc, char *argv[])
@@ -81,43 +101,43 @@ int	main(int argc, char *argv[])
 	// 버퍼에 한번에 불러온다.
 	char	*buf;
 	buf = ft_read(open(argv[1], O_RDONLY));
-	printf("%s", buf);
 
-	// x와 y 가져오기
+	// x와 y 가져오기 + 파일 적합성 확인
 	int	x;
 	int	y;
-	ft_get_xy(buf, &x, &y);
-	printf("x: %d, y: %d\n", x, y);
- 
+	if (!ft_get_xy(buf, &x, &y))
+		return (RET_ERR);
+
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
 	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
-	int	i = 0;
-	int	j = 0;
-	while (j < x)
-		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
+	int	cx = 0;
+	int	cy = 0;
+	while (cy < x)
+		dots[cy++] = (t_dot *)malloc(sizeof(t_dot) * y);
 	int	sp = 1;
-	j = 0;
+	cy = 0;
 	while (*buf)
 	{
 		if (sp && *buf != ' ' && *buf != '\n')
 		{
-			dots[i][j].z = ft_atoi(&buf);
-			dots[i][j].color = ft_0xatoi(buf);
-			printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
-			i++; 
-		}
-		if (*buf == '\n')
-		{
-			i = 0;
-			j++;
+			dots[cx][cy].z = ft_atoi(&buf);
+			dots[cx][cy].color = ft_0xatoi(buf);
+			if (!*buf)
+				break;
+			cx++;
 		}
 		sp = (*buf == ' ' || *buf == '\n');
+		if (*buf == '\n')
+		{
+			cx = 0;
+			cy++;
+		}
 		buf++;
 	}
 
-	// // 점을 찍고 이웃한 점을 연결하자.
-	// t_ptr	ptr;
-	// draw_dot(ptr, dots, x, y);
+	// 점을 찍고 이웃한 점을 연결하자.
+	t_ptr	ptr;
+	draw_dot(ptr, dots, x, y);
 }
 
 void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
