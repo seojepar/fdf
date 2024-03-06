@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 18:57:22 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 21:12:48 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	key_handler(int key, void *arg)
 	if (key == UP)
 		tmp->y--;
 	if (key == DOWN)
-		tmp->y++;	
+		tmp->y++;
 	mlx_clear_window(tmp->mlx, tmp->win);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
 	return (1);
@@ -82,6 +82,7 @@ int	mouse_handler(int button, int x, int y, void *param)
 int	expose_handler(void *param)
 {
 	printf("Expose handler was called");
+	// called when 다른 창에 포커스가 집중되어있다가 바뀔 때
 	return (1);
 }
 
@@ -169,6 +170,12 @@ int	main(int argc, char *argv[])
 	draw_dot(ptr, dots, x, y);
 }
 
+int	ft_close(t_ptr *ptr)
+{
+	exit(1);
+	return (0);
+}
+
 void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 {
 	int		scale = 40;
@@ -204,5 +211,7 @@ void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 	mlx_key_hook(ptr.win, key_handler, &ptr);
 	mlx_mouse_hook(ptr.win, mouse_handler, &ptr);
 	mlx_expose_hook(ptr.win, expose_handler, &ptr);
+	mlx_hook(ptr.win, ON_DESTROY, 0, ft_close, &ptr);
 	mlx_loop(ptr.mlx);
 }
+
