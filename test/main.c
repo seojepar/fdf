@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/05 22:06:24 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:02:24 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,14 @@ int	main(int argc, char *argv[])
 	while (j < x)
 		dots[j++] = (t_dot *)malloc(sizeof(t_dot) * y);
 	int	sp = 1;
-	printf("buf:\n%s\n, x:%d, y:%d", buf, x, y);
 	while (*buf)
 	{
 		if (sp && *buf != ' ' && *buf != '\n')
 		{
 			dots[i][j].z = ft_atoi(&buf);
 			dots[i][j].color = ft_0xatoi(buf);
-			// printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
-			i++;
+			printf("i: %d, j: %d, z: %d, color:%d\n", i, j, dots[i][j].z, dots[i][j].color);
+			i++; 
 		}
 		if (*buf == '\n')
 		{
