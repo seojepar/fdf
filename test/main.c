@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 21:12:48 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:02:39 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ int	key_handler(int key, void *arg)
 	return (1);
 }
 
-int	mouse_handler(int button, int x, int y, void *param)
+int	mouse_on(int button, int x, int y, void *param)
 {
 	t_ptr	*tmp;
 
 	tmp = (t_ptr *)param;
+	tmp->mouse = 1;
+	mlx_hook(tmp->win, ON_MOUSEMOVE, 0, mouse_move, param);
 	printf("button: %d, x: %d, y: %d\n", button, x, y);
 	if (button == 5)
 		tmp->y--;
@@ -76,6 +78,12 @@ int	mouse_handler(int button, int x, int y, void *param)
 		tmp->y++;
 	mlx_clear_window(tmp->mlx, tmp->win);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->x, tmp->y);
+	return (1);
+}
+
+int	mouse_off(int button, int x, int y, void *param)
+{
+	((t_ptr	*)param)->mouse = 0;
 	return (1);
 }
 
@@ -129,9 +137,17 @@ int	ft_get_xy(char *file, int *x, int *y)
 
 int	main(int argc, char *argv[])
 {
+	if (argc != 2)
+	{
+		printf("Parameter Error");
+		return (INPUT_ERR);
+	}
+
 	// 버퍼에 한번에 불러온다.
 	char	*buf;
 	buf = ft_read(open(argv[1], O_RDONLY));
+	if (!buf)
+		return (RET_ERR);
 
 	// x와 y 가져오기 + 파일 적합성 확인
 	int	x;
@@ -140,19 +156,20 @@ int	main(int argc, char *argv[])
 		return (RET_ERR);
 
 	// 점이라는 구조체의 배열을 동적배열로 선언해서 담자. 왜 굳이 동적배열?
-	t_dot	**dots = (t_dot **)malloc(sizeof(t_dot *) * x);
+	t_ptr	ptr;
+	ptr.dot = (t_dot **)malloc(sizeof(t_dot *) * x);
 	int	cx = 0;
 	int	cy = 0;
 	while (cy < x)
-		dots[cy++] = (t_dot *)malloc(sizeof(t_dot) * y);
+		ptr.dot[cy++] = (t_dot *)malloc(sizeof(t_dot) * y);
 	int	sp = 1;
 	cy = 0;
 	while (*buf)
 	{
 		if (sp && *buf != ' ' && *buf != '\n')
 		{
-			dots[cx][cy].z = ft_atoi(&buf);
-			dots[cx][cy].color = ft_0xatoi(buf);
+			ptr.dot[cx][cy].z = ft_atoi(&buf);
+			ptr.dot[cx][cy].color = ft_0xatoi(buf);
 			if (!*buf)
 				break;
 			cx++;
@@ -165,9 +182,7 @@ int	main(int argc, char *argv[])
 		}
 		buf++;
 	}
-
-	t_ptr	ptr;
-	draw_dot(ptr, dots, x, y);
+	draw_dot(ptr, x, y);
 }
 
 int	ft_close(t_ptr *ptr)
@@ -176,13 +191,25 @@ int	ft_close(t_ptr *ptr)
 	return (0);
 }
 
-void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
+int	mouse_move(int x, int y, void *param)
+{
+	t_ptr	*tmp;
+
+	tmp = (t_ptr *)param;
+	if (tmp->mouse == 0)
+		return (0);
+	printf("%d %d\n", x, y);
+	return (1);
+}
+
+void	draw_dot(t_ptr ptr, int x, int y)
 {
 	int		scale = 40;
 	int		mx = 0;
 	int 	my = 0;
 	int		i = 0;
 	int 	j = 0;
+	t_dot	**dots = ptr.dot;
 
 	ptr.mlx = mlx_init();
 	ptr.win = mlx_new_window(ptr.mlx, 1200, 1200, "Power Code");
@@ -209,9 +236,9 @@ void	draw_dot(t_ptr ptr, t_dot **dots, int x, int y)
 	}
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, ptr.x, ptr.y);
 	mlx_key_hook(ptr.win, key_handler, &ptr);
-	mlx_mouse_hook(ptr.win, mouse_handler, &ptr);
 	mlx_expose_hook(ptr.win, expose_handler, &ptr);
 	mlx_hook(ptr.win, ON_DESTROY, 0, ft_close, &ptr);
+	mlx_mouse_hook(ptr.win, mouse_on, &ptr);
+	mlx_hook(ptr.win, ON_MOUSEUP, 0, mouse_off, &ptr);
 	mlx_loop(ptr.mlx);
 }
-
