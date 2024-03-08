@@ -34,12 +34,14 @@ char	*ft_strjoin(char *a, char *b)
 	return (ret);
 }
 
-char	*ft_read(int fd)
+char	*read_file(int fd)
 {
 	char	*out;
 	char	*buf;
 	int		n = 100000;
 
+	if (fd < 0)
+		return (0);
 	out = malloc(1);
 	*out = '\0';
 	// read 함수 사용하기 전에 초기화 안해서 쓰레기값까지 다 들어갔었다.
@@ -64,3 +66,44 @@ char	*ft_read(int fd)
 // 	char	*buf = ft_read(open(argv[1], O_RDONLY));
 // 	printf("This is the buffer:\n%s", buf);
 // }
+
+int	get_xy(char	*file, t_input *info)
+{
+	int	is_sp = 1;
+	int	first_row_count = 0;
+	int	other_row_count = 0;
+	int	total_count;
+
+	while (*file)
+	{
+		if (is_sp && !((*file == ' ') || (*file == '\n')))
+			first_row_count++;
+		is_sp = ((*file == ' ') || (*file == '\n'));
+		if (*file == '\n')
+		{
+			file++;
+			break;
+		}
+		file++;
+	}
+	total_count = first_row_count;
+	while (*file)
+	{
+		if (is_sp && !((*file == ' ') || (*file == '\n')))
+		{
+			other_row_count++;
+			total_count++;
+		}
+		if (*file == '\n')
+		{
+			if (other_row_count != first_row_count)
+				return (INPUT_ERR);
+			other_row_count = 0;
+		}
+		is_sp = ((*file == ' ') || (*file == '\n'));
+		file++;
+	}
+	info->x = first_row_count;
+	info->y = total_count / first_row_count;
+	return (RET_SUC);
+}

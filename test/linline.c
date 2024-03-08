@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/06 17:32:59 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:07:55 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
 		dx = -dx;
 	}
 	dis = 2 * dx - dy;
-	while (dc.cy <= d2.cy)
+	while (dc.cy < d2.cy)
 	{
 		dc.color = ((d2.cy - dc.cy) * d1.color + (dc.cy - d1.cy) * d2.color) / (d2.cy - d1.cy);
 		plot_dot(dc, ptr);
@@ -73,7 +73,7 @@ void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
 	dis = 2 * dy - dx;
 	dc.cx = d1.cx;
 	dc.cy = d1.cy;
-	while (dc.cx <= d2.cx)
+	while (dc.cx < d2.cx)
 	{
 		dc.color = ((d2.cx - dc.cx) * d1.color + (dc.cx - d1.cx) * d2.color) / (d2.cx - d1.cx);
 		plot_dot(dc, ptr);

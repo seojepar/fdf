@@ -1,4 +1,4 @@
-SRC = main.c linline.c read_file.c utils.c
+SRC = main.c linline.c read_file.c utils.c event_handler.c mlx_init.c image.c start.c
 TARGET = fdf
 INC = ./minilibx_macos
 CC = cc -g -fsanitize=address
