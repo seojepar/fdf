@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/08 16:11:43 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:24:23 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,13 @@ void	save_dots(char *buf, t_input *info)
 
 t_input	*get_input(int fd)
 {
-	char	*buf = read_file(fd);
-	t_input	*info = malloc(sizeof(t_input));
+	char	*buf;
+	t_input	*info;
+
+	buf = read_file(fd);
+	if (!buf)
+		return (0);
+	info = malloc(sizeof(t_input));
 	if (!info)
 		return (0);
 	if (!get_xy(buf, info))
@@ -87,8 +92,8 @@ void	dots_to_img(t_ptr *ptr)
 		j = 0;
 		while (j < input->y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * info.scale + 500;
-			dots[i][j].cy = (i + j) * info.scale / 2 + 300 - dots[i][j].z * info.height;
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * info.scale + 500 + ptr->view.x;
+			dots[i][j].cy = (i + j) * info.scale / 2 + 300 - dots[i][j].z * info.height + ptr->view.y;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;
 			if (i > 0)

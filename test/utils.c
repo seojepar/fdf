@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:48:00 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/01/18 20:48:07 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/08 19:00:36 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_0xatoi(char *str)
 
 	if (*str != ',')
 		return (-1);
-	str++;
+	str += 3;
 	num = 0;
 	while (*str)
 	{

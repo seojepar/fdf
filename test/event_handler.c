@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/08 16:15:26 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/09 01:42:35 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,34 @@
 int	key_handler(int key, void *arg)
 {
 	t_ptr	*tmp;
-	t_view	view;
+	printf("%d\n", key);
 
 	tmp = ((t_ptr *)arg);
-	view = tmp->view;
 	if (key == ESC)
 	{
 		mlx_destroy_window(tmp->mlx, tmp->win);
 		exit(1);
 	}
 	if (key == LEFT)
-		view.x--;
+		tmp->view.x--;
 	if (key == RIGHT)
-		view.x++;
+		tmp->view.x++;
 	if (key == UP)
-		view.y--;
+		tmp->view.y--;
 	if (key == DOWN)
-		view.y++;
+		tmp->view.y++;
+	if (key == MINUS)
+		tmp->view.scale -= 5;
+	if (key == PLUS)
+		tmp->view.scale += 5;
 	if (key == PGDN)
+		tmp->view.height -= 0.2;
+	if (key == PGUP)
+		tmp->view.height += 0.2;
+	reset_buf(*tmp);
+	dots_to_img(tmp);
 	mlx_clear_window(tmp->mlx, tmp->win);
-	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, tmp->view.x, tmp->view.y);
+	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, 0, 0);
 	return (1);
 }
 

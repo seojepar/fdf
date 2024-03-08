@@ -43,9 +43,16 @@ char	*read_file(int fd)
 	if (fd < 0)
 		return (0);
 	out = malloc(1);
+	if (!out)
+		return (0);
 	*out = '\0';
 	// read 함수 사용하기 전에 초기화 안해서 쓰레기값까지 다 들어갔었다.
 	buf = malloc(n + 1);
+	if (!buf)
+	{
+		free(out);
+		return (0);
+	}
 	while (1)
 	{
 		int len = read(fd, buf, n);
@@ -54,6 +61,11 @@ char	*read_file(int fd)
 		// read는 널을 보장해주지 않는다 - sgang
 		buf[len] = '\0';
 		out = ft_strjoin(out, buf);
+		if (!out)
+		{
+			free(buf);
+			return (0);
+		}
 		// free(buf);
 		// buf = malloc(n);
 	}

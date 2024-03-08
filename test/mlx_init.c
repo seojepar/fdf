@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/08 16:12:19 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:57:40 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,20 @@ void	init_mlx(t_ptr *ptr)
 	ptr->view.y = 0;
 	ptr->view.scale = 40;
 	ptr->view.height = 3.5;
+}
+
+void	reset_buf(t_ptr ptr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 1200)
+	{
+		j = 0;
+		while (j < 1200)
+			img_pixel_put(ptr, i, j++, 0);
+		i++;
+	}
+	
 }

@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/08 15:49:43 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:57:51 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define DOWN 125
 # define PGDN 121
 # define PGUP 116
+# define MINUS 27
+# define PLUS 24
 # define INPUT_ERR	 	0
 # define RET_SUC 		1
 # define RET_ERR 		0
@@ -100,5 +102,7 @@ void	dots_to_img(t_ptr *ptr);
 t_input	*get_input(int fd);
 void	save_dots(char *buf, t_input *info);
 int		init_info(t_input *info);
+void	reset_buf(t_ptr ptr);
+
 
 #endif
