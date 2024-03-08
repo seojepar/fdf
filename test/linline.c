@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/08 16:07:55 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:41:38 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 void	plot_dot(t_dot d, t_ptr ptr)
 {
 	// mlx_pixel_put(ptr.mlx, ptr.win, d.cx, d.cy, d.color);
-	if (d.cx >= 0 && d.cy >= 0)
+	// printf("%d %d\n", d.cx, d.cy);
+	// d.cx 나 d.cy 가 1200 '이상' 이 되기만 해도 버퍼 오버플로우가 발생했다.
+	if (0 <= d.cx && d.cx < 1200 && 0 <= d.cy && d.cy < 1200)
 		img_pixel_put(ptr, d.cx, d.cy, d.color);
 }
 
