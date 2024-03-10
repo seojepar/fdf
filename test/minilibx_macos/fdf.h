@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/08 17:57:51 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:04:48 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+
+# define BUF_SIZE 100000;
+
 # define ESC 53
 # define LEFT 123
 # define RIGHT 124
@@ -27,6 +30,7 @@
 # define PGUP 116
 # define MINUS 27
 # define PLUS 24
+
 # define INPUT_ERR	 	0
 # define RET_SUC 		1
 # define RET_ERR 		0
@@ -36,6 +40,9 @@
 # define ON_MOUSEUP		5
 # define ON_DESTROY		17
 # define HEIGHT_SCALE	3.5
+
+# define WIN_X 1200
+# define WIN_Y 1200
 
 typedef struct s_dot{
 	int	cx;

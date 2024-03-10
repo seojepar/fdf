@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/09 01:42:24 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:53:15 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	error(void)
 
 int	main(int argc, char *argv[])
 {
+	t_ptr	ptr;
+
 	if (argc != 2)
 		error();
-	t_ptr	ptr;
 	ptr.in = get_input(open(argv[1], O_RDONLY));
 	if (!ptr.in)
 		error();

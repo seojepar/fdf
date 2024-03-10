@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:48:00 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/08 19:00:36 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:02:48 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,6 @@ int	ft_strlen(char *str)
 	while (*(str + i))
 		i++;
 	return (i);
-}
-
-char	*ft_strcat(char *s1, char *s2)
-{
-	int		len1;
-	int		len2;
-	char	*out;
-	int		i;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	out = malloc(len1 + len2 + 1);
-	if (!out)
-		return (NULL);
-	i = 0;
-	while (i < len1)
-	{
-		out[i] = s1[i];
-		i++;
-	}
-	i = 0;
-	while (i < len2)
-	{
-		out[len1 + i] = s2[i];
-		i++;
-	}
-	free(s1);
-	free(s2);
-	return (out);
 }
 
 int	ft_0xatoi(char *str)

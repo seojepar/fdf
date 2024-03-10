@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/09 01:24:23 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:52:12 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	save_dots(char *buf, t_input *info)
 			info->dot[x][y].z = ft_atoi(&buf);
 			info->dot[x][y].color = ft_0xatoi(buf);
 			if (!*buf)
-				break;
+				break ;
 			x++;
 		}
 		sp = (*buf == ' ' || *buf == '\n');

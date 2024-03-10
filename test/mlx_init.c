@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/08 17:57:40 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:03:02 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ void	reset_buf(t_ptr ptr)
 			img_pixel_put(ptr, i, j++, 0);
 		i++;
 	}
-	
 }

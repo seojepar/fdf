@@ -1,11 +1,17 @@
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
+/*   Updated: 2024/03/10 17:07:29 by seojepar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
-// a=out, b=buf
 char	*ft_strjoin(char *a, char *b)
 {
 	int		len;
@@ -14,7 +20,6 @@ char	*ft_strjoin(char *a, char *b)
 	int		j;
 
 	ret = malloc(ft_strlen(a) + ft_strlen(b) + 1);
-	// 코딩에서 지금 널가드가 하나도 안되어있다.
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -34,31 +39,33 @@ char	*ft_strjoin(char *a, char *b)
 	return (ret);
 }
 
-char	*read_file(int fd)
-{
-	char	*out;
-	char	*buf;
-	int		n = 100000;
-
-	if (fd < 0)
-		return (0);
+int	buf_init(char **out, char **buf)
+{	
 	out = malloc(1);
 	if (!out)
 		return (0);
 	*out = '\0';
-	// read 함수 사용하기 전에 초기화 안해서 쓰레기값까지 다 들어갔었다.
-	buf = malloc(n + 1);
+	buf = malloc(BUF_SIZE + 1);
 	if (!buf)
 	{
 		free(out);
 		return (0);
 	}
+}
+
+char	*read_file(int fd)
+{
+	char	*out;
+	char	*buf;
+	int		len;
+
+	if (fd < 0)
+		return (0);
 	while (1)
 	{
-		int len = read(fd, buf, n);
+		len = read(fd, buf, BUF_SIZE);
 		if (len <= 0)
-			break;
-		// read는 널을 보장해주지 않는다 - sgang
+			break ;
 		buf[len] = '\0';
 		out = ft_strjoin(out, buf);
 		if (!out)
@@ -66,56 +73,59 @@ char	*read_file(int fd)
 			free(buf);
 			return (0);
 		}
-		// free(buf);
-		// buf = malloc(n);
 	}
 	free(buf);
 	return (out);
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	char	*buf = ft_read(open(argv[1], O_RDONLY));
-// 	printf("This is the buffer:\n%s", buf);
-// }
-
-int	get_xy(char	*file, t_input *info)
+int	get_x(char *file)
 {
-	int	is_sp = 1;
-	int	first_row_count = 0;
-	int	other_row_count = 0;
-	int	total_count;
+	int	x;
+	int	is_sp;
 
+	x = 0;
+	is_sp = 1;
 	while (*file)
 	{
 		if (is_sp && !((*file == ' ') || (*file == '\n')))
-			first_row_count++;
+			x++;
 		is_sp = ((*file == ' ') || (*file == '\n'));
 		if (*file == '\n')
 		{
 			file++;
-			break;
+			break ;
 		}
 		file++;
 	}
-	total_count = first_row_count;
+	return (x);
+}
+
+int	get_xy(char	*file, t_input *info)
+{
+	int	is_sp;
+	int	row_x;
+	int	total_count;
+
+	info->x = get_x(file);
+	row_x = 0;
+	is_sp = 1;
+	total_count = info->x;
 	while (*file)
 	{
 		if (is_sp && !((*file == ' ') || (*file == '\n')))
 		{
-			other_row_count++;
+			row_x++;
 			total_count++;
 		}
 		if (*file == '\n')
 		{
-			if (other_row_count != first_row_count)
+			if (row_x != info->x)
 				return (INPUT_ERR);
-			other_row_count = 0;
+			row_x = 0;
 		}
 		is_sp = ((*file == ' ') || (*file == '\n'));
 		file++;
 	}
-	info->x = first_row_count;
-	info->y = total_count / first_row_count;
+	info->y = total_count / info->x;
 	return (RET_SUC);
 }
