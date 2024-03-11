@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/10 17:07:29 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:31:23 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ char	*ft_strjoin(char *a, char *b)
 
 int	buf_init(char **out, char **buf)
 {	
-	out = malloc(1);
-	if (!out)
+	*out = malloc(1);
+	if (!*out)
 		return (0);
-	*out = '\0';
-	buf = malloc(BUF_SIZE + 1);
-	if (!buf)
+	**out = '\0';
+	*buf = malloc(BUF_SIZE + 1);
+	if (!*buf)
 	{
-		free(out);
+		free(*out);
 		return (0);
 	}
+	return (1);
 }
 
 char	*read_file(int fd)
@@ -61,6 +62,7 @@ char	*read_file(int fd)
 
 	if (fd < 0)
 		return (0);
+	buf_init(&out, &buf);
 	while (1)
 	{
 		len = read(fd, buf, BUF_SIZE);
