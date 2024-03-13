@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/09 01:42:35 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:14:12 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int	key_handler(int key, void *arg)
 {
 	t_ptr	*tmp;
-	printf("%d\n", key);
 
 	tmp = ((t_ptr *)arg);
 	if (key == ESC)
@@ -77,7 +76,6 @@ int	mouse_off(int button, int x, int y, void *param)
 int	expose_handler(void *param)
 {
 	printf("Expose handler was called");
-	// called when 다른 창에 포커스가 집중되어있다가 바뀔 때
 	return (RET_SUC);
 }
 
@@ -94,6 +92,5 @@ int	mouse_move(int x, int y, void *param)
 	tmp = (t_ptr *)param;
 	if (tmp->view.mouse == 0)
 		return (0);
-	printf("%d %d\n", x, y);
 	return (1);
 }

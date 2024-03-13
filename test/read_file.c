@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/11 17:31:23 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/13 18:13:17 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin(char *a, char *b)
 }
 
 int	buf_init(char **out, char **buf)
-{	
+{
 	*out = malloc(1);
 	if (!*out)
 		return (0);
@@ -115,12 +115,10 @@ int	get_xy(char	*file, t_input *info)
 	while (*file)
 	{
 		if (is_sp && !((*file == ' ') || (*file == '\n')))
-		{
 			row_x++;
-			total_count++;
-		}
 		if (*file == '\n')
 		{
+			total_count += row_x;
 			if (row_x != info->x)
 				return (INPUT_ERR);
 			row_x = 0;
@@ -128,6 +126,6 @@ int	get_xy(char	*file, t_input *info)
 		is_sp = ((*file == ' ') || (*file == '\n'));
 		file++;
 	}
-	info->y = total_count / info->x;
+	info->y = total_count / info->x + 1;
 	return (RET_SUC);
 }

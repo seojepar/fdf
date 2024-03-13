@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/10 16:52:12 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:18:25 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_info(t_input *info)
 {
 	int	x;
 	int	y;
-	int i;
+	int	i;
 
 	x = info->x;
 	y = info->y;
@@ -37,9 +37,13 @@ int	init_info(t_input *info)
 
 void	save_dots(char *buf, t_input *info)
 {
-	int	x = 0;
-	int	y = 0;
-	int	sp = 1;
+	int	x;
+	int	y;
+	int	sp;
+
+	x = 0;
+	y = 0;
+	sp = 1;
 	while (*buf)
 	{
 		if (sp && *buf != ' ' && *buf != '\n')
@@ -81,19 +85,26 @@ t_input	*get_input(int fd)
 
 void	dots_to_img(t_ptr *ptr)
 {
-	t_view	info = ptr->view;
-	int		i = 0;
-	int 	j = 0;
-	t_input	*input = ptr->in;
-	t_dot	**dots = input->dot;
+	t_view	info;
+	int		i;
+	int		j;
+	t_input	*input;
+	t_dot	**dots;
 
+	info = ptr->view;
+	i = 0;
+	j = 0;
+	input = ptr->in;
+	dots = input->dot;
 	while (i < input->x)
 	{
 		j = 0;
 		while (j < input->y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * info.scale + 500 + ptr->view.x;
-			dots[i][j].cy = (i + j) * info.scale / 2 + 300 - dots[i][j].z * info.height + ptr->view.y;
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * info.scale + WIN_X / 2;
+			dots[i][j].cx += ptr->view.x;
+			dots[i][j].cy = (i + j) * info.scale / 2 + WIN_Y / 4 - dots[i][j].z * info.height;
+			dots[i][j].cy += ptr->view.y;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;
 			if (i > 0)
