@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/13 18:13:17 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 12:02:38 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	get_x(char *file)
 	return (x);
 }
 
-int	get_xy(char	*file, t_input *info)
+int	get_xy(char	*file, t_dots *info)
 {
 	int	is_sp;
 	int	row_x;

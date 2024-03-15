@@ -6,14 +6,14 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/14 12:24:32 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 12:01:40 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
 
-void	plot_line(t_dot d1, t_dot d2, t_ptr ptr)
+void	plot_line(t_coord d1, t_coord d2, t_ptr ptr)
 {
 	if (out_of_win(d1, d2))
 		return ;
@@ -33,9 +33,9 @@ void	plot_line(t_dot d1, t_dot d2, t_ptr ptr)
 	}
 }
 
-void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
+void	plot_line_high(t_coord d1, t_coord d2, t_ptr ptr)
 {
-	t_dot	dc;
+	t_coord	dc;
 	int		dx;
 	int		dy;
 	int		xi;
@@ -50,7 +50,7 @@ void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
 	while (dc.cy < d2.cy)
 	{
 		dc.color = gen_color(d1, d2, dc, 2);
-		plot_dot(dc, ptr);
+		plot_coord(dc, ptr);
 		dc.cy++;
 		if (dis > 0)
 		{
@@ -62,9 +62,9 @@ void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr)
 	}
 }
 
-void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
+void	plot_line_low(t_coord d1, t_coord d2, t_ptr ptr)
 {
-	t_dot	dc;
+	t_coord	dc;
 	int		dx;
 	int		dy;
 	int		yi;
@@ -79,7 +79,7 @@ void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
 	while (dc.cx < d2.cx)
 	{
 		dc.color = gen_color(d1, d2, dc, 1);
-		plot_dot(dc, ptr);
+		plot_coord(dc, ptr);
 		dc.cx++;
 		if (dis > 0)
 		{
@@ -91,7 +91,7 @@ void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr)
 	}
 }
 
-int	out_of_win(t_dot d1, t_dot d2)
+int	out_of_win(t_coord d1, t_coord d2)
 {
 	int	x;
 
@@ -100,7 +100,7 @@ int	out_of_win(t_dot d1, t_dot d2)
 	return (x);
 }
 
-void	plot_dot(t_dot d, t_ptr ptr)
+void	plot_coord(t_coord d, t_ptr ptr)
 {
 	if (0 <= d.cx && d.cx < WIN_X && 0 <= d.cy && d.cy < WIN_Y)
 		img_pixel_put(ptr, d.cx, d.cy, d.color);

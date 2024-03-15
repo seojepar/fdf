@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 11:56:08 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:16:31 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_mlx(t_ptr *ptr)
 	ptr->view.x = WIN_X / 2;
 	ptr->view.y = WIN_Y / 2;
 	ptr->view.scale = 40;
-	ptr->view.height = 3.5;
+	ptr->view.height = 0.12;
 }
 
 void	reset_buf(t_ptr ptr)

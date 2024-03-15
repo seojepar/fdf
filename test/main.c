@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 11:53:21 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:20:35 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		error();
-	ptr.in = get_input(open(argv[1], O_RDONLY));
-	if (!ptr.in)
+	ptr.dots = get_dots(open(argv[1], O_RDONLY));
+	// ptr.dots = get_dots(open("./test_maps/42.fdf", O_RDONLY));
+	if (!ptr.dots)
 		error();
 	init_mlx(&ptr);
-	gen_dot(&ptr);
+	gen_dots(&ptr);
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 0, 0);
 	hooks(ptr);
 }

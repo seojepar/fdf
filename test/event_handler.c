@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 11:53:21 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:59:36 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	key_handler(int key, void *arg)
 	tmp->view.scale += (-5) * (key == MINUS) + 5 * (key == PLUS);
 	tmp->view.height += (-0.2) * (key == PGDN) + 0.2 * (key == PGUP);
 	reset_buf(*tmp);
-	gen_dot(tmp);
+	gen_dots(tmp);
 	mlx_clear_window(tmp->mlx, tmp->win);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, 0, 0);
 	return (1);
@@ -43,7 +43,7 @@ int	mouse_on(int button, int x, int y, void *param)
 	}
 	tmp->view.y += (-1) * (button == 5) + (button == 4);
 	reset_buf(*tmp);
-	gen_dot(tmp);
+	gen_dots(tmp);
 	mlx_clear_window(tmp->mlx, tmp->win);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, 0, 0);
 	return (1);

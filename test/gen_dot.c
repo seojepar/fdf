@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_dot.c                                          :+:      :+:    :+:   */
+/*   gen_dots.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 11:55:27 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:59:30 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-int	init_info(t_input *info)
+int	init_info(t_dots *info)
 {
 	int	x;
 	int	y;
@@ -21,13 +21,13 @@ int	init_info(t_input *info)
 
 	x = info->x;
 	y = info->y;
-	info->dot = (t_dot **)malloc(sizeof(t_dot *) * x);
+	info->dot = (t_coord **)malloc(sizeof(t_coord *) * x);
 	if (!info->dot)
 		return (0);
 	i = 0;
 	while (i < x)
 	{
-		info->dot[i] = (t_dot *)malloc(sizeof(t_dot) * y);
+		info->dot[i] = (t_coord *)malloc(sizeof(t_coord) * y);
 		if (!info->dot[i])
 			return (0);
 		i++;
@@ -35,7 +35,7 @@ int	init_info(t_input *info)
 	return (1);
 }
 
-void	save_dots(char *buf, t_input *info)
+void	save_dots(char *buf, t_dots *info)
 {
 	int	x;
 	int	y;
@@ -64,15 +64,15 @@ void	save_dots(char *buf, t_input *info)
 	}
 }
 
-t_input	*get_input(int fd)
+t_dots	*get_dots(int fd)
 {
 	char	*buf;
-	t_input	*info;
+	t_dots	*info;
 
 	buf = read_file(fd);
 	if (!buf)
 		return (0);
-	info = malloc(sizeof(t_input));
+	info = malloc(sizeof(t_dots));
 	if (!info)
 		return (0);
 	if (!get_xy(buf, info))
@@ -83,31 +83,48 @@ t_input	*get_input(int fd)
 	return (info);
 }
 
-void	gen_dot(t_ptr *ptr)
+void	gen_dot(t_ptr *ptr, int i, int j)
+{
+	t_coord	**dots;
+	float	z;
+	float	di;
+	float	dj;
+
+	dots = ptr->dots->dot;
+	z = dots[i][j].z * ptr->view.height;
+	di = i - ptr->dots->x / 2;
+	dj = j - ptr->dots->y / 2;
+	dots[i][j].cx = sqrt(3) * (di - dj) / 2 * ptr->view.scale;
+	dots[i][j].cx += ptr->view.x;
+	dots[i][j].cy = ((di + dj) / 2 - z) * ptr->view.scale;
+	dots[i][j].cy += ptr->view.y;
+	if (dots[i][j].color < 0)
+		dots[i][j].color = 0xFFFFFF;
+}
+
+void	gen_dots(t_ptr *ptr)
 {
 	int		i;
 	int		j;
-	t_dot	**dots;
+	t_coord	**dots;
 
 	i = -1;
 	j = 0;
-	dots = ptr->in->dot;
-	while (++i < ptr->in->x)
+	dots = ptr->dots->dot;
+	while (++i < ptr->dots->x)
 	{
 		j = 0;
-		while (j < ptr->in->y)
+		while (j < ptr->dots->y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * ptr->view.scale;
-			dots[i][j].cx += ptr->view.x;
-			dots[i][j].cy = (i + j) * SCALE * ptr->view.scale / 2;
-			dots[i][j].cy += ptr->view.y - dots[i][j].z * ptr->view.height;
-			if (dots[i][j].color < 0)
-				dots[i][j].color = 0xFFFFFF;
+			gen_dot(ptr, i, j);
+			printf("i: %d, j: %d, x: %d, y: %d\n",i, j, dots[i][j].cx, dots[i][j].cy);
 			if (i > 0)
 				plot_line(dots[i - 1][j], dots[i][j], *ptr);
 			if (j > 0)
 				plot_line(dots[i][j - 1], dots[i][j], *ptr);
 			j++;
+			printf("What is happening");
 		}
+		printf("Where is the loop");
 	}
 }

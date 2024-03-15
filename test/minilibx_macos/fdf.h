@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 11:53:21 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:06:39 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@
 # define WIN_X 1200
 # define WIN_Y 1200
 
-typedef struct s_dot{
+typedef struct s_coord{
 	int	cx;
 	int	cy;
 	int	z;
 	int	color;
-}	t_dot;
+}	t_coord;
 
-typedef struct s_input{
+typedef struct s_dots{
 	int		x;
 	int		y;
-	t_dot	**dot;
-}	t_input;
+	t_coord	**dot;
+}	t_dots;
 
 typedef struct s_view{
 	int		x;
@@ -71,11 +71,11 @@ typedef struct s_ptr{
 	void	*win;
 	void	*img;
 	char	*buf;
-	t_input	*in;
+	t_dots	*dots;
 	t_view	view;
-	int		pix; // pixel_bits
-	int		line; // line_bytes
-	int		end; // endian
+	int		pix;	// pixel_bits
+	int		line;	// line_bytes
+	int		end;	// endian
 }	t_ptr;
 
 char	*ft_substr(char *start, char *end);
@@ -85,14 +85,14 @@ int		ft_0xatoi(char *str);
 int		ft_atoi(char **str);
 void	ft_switch(int *a, int *b);
 
-void	gen_dot(t_ptr *ptr);
-void	plot_dot(t_dot d, t_ptr ptr);
-void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr);
-void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr);
-void	plot_line(t_dot d1, t_dot d2, t_ptr ptr);
+void	gen_dots(t_ptr *ptr);
+void	plot_coord(t_coord d, t_ptr ptr);
+void	plot_line_high(t_coord d1, t_coord d2, t_ptr ptr);
+void	plot_line_low(t_coord d1, t_coord d2, t_ptr ptr);
+void	plot_line(t_coord d1, t_coord d2, t_ptr ptr);
 void	img_pixel_put(t_ptr ptr, int x, int y, int color);
 
-int		get_xy(char	*file, t_input *info);
+int		get_xy(char	*file, t_dots *info);
 char	*ft_strjoin(char *a, char *b);
 char	*read_file(int fd);
 int		mouse_move(int x, int y, void *param);
@@ -105,14 +105,14 @@ int		mouse_off(int button, int x, int y, void *param);
 int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
 int		mouse_move(int x, int y, void *param);
-void	gen_dot(t_ptr *ptr);
-t_input	*get_input(int fd);
-void	save_dots(char *buf, t_input *info);
-int		init_info(t_input *info);
+void	gen_dots(t_ptr *ptr);
+t_dots	*get_dots(int fd);
+void	save_dots(char *buf, t_dots *info);
+int		init_info(t_dots *info);
 void	reset_buf(t_ptr ptr);
-int		out_of_win(t_dot d1, t_dot d2);
+int		out_of_win(t_coord d1, t_coord d2);
 
 int		div_color(int m, int n, int c1, int c2);
-int		gen_color(t_dot d1, t_dot d2, t_dot dc, int flag);
+int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
 
 #endif

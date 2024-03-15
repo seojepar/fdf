@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   gen_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:06:03 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 11:37:44 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:01:40 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	div_color(int m, int n, int c1, int c2)
 	return ((m * c2 + n * c1) / (m + n));
 }
 
-int	gen_color(t_dot d1, t_dot d2, t_dot dc, int flag)
+int	gen_color(t_coord d1, t_coord d2, t_coord dc, int flag)
 {
 	int	ret;
 	int	m;
