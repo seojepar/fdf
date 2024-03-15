@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_dots.c                                          :+:      :+:    :+:   */
+/*   gen_dot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 11:59:30 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 14:05:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	gen_dot(t_ptr *ptr, int i, int j)
 	dots[i][j].cx += ptr->view.x;
 	dots[i][j].cy = ((di + dj) / 2 - z) * ptr->view.scale;
 	dots[i][j].cy += ptr->view.y;
-	if (dots[i][j].color < 0)
-		dots[i][j].color = 0xFFFFFF;
 }
 
 void	gen_dots(t_ptr *ptr)
@@ -108,23 +106,20 @@ void	gen_dots(t_ptr *ptr)
 	int		j;
 	t_coord	**dots;
 
-	i = -1;
-	j = 0;
 	dots = ptr->dots->dot;
-	while (++i < ptr->dots->x)
+	i = 0;
+	while (i < ptr->dots->x)
 	{
 		j = 0;
 		while (j < ptr->dots->y)
 		{
 			gen_dot(ptr, i, j);
-			printf("i: %d, j: %d, x: %d, y: %d\n",i, j, dots[i][j].cx, dots[i][j].cy);
 			if (i > 0)
 				plot_line(dots[i - 1][j], dots[i][j], *ptr);
 			if (j > 0)
 				plot_line(dots[i][j - 1], dots[i][j], *ptr);
 			j++;
-			printf("What is happening");
 		}
-		printf("Where is the loop");
+		i++;
 	}
 }

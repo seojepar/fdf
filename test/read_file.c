@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 12:02:38 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 14:03:18 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	get_xy(char	*file, t_dots *info)
 	info->x = get_x(file);
 	row_x = 0;
 	is_sp = 1;
-	total_count = info->x;
+	total_count = 0;
 	while (*file)
 	{
 		if (is_sp && !((*file == ' ') || (*file == '\n')))
@@ -126,6 +126,6 @@ int	get_xy(char	*file, t_dots *info)
 		is_sp = ((*file == ' ') || (*file == '\n'));
 		file++;
 	}
-	info->y = total_count / info->x + 1;
+	info->y = total_count / info->x;
 	return (RET_SUC);
 }

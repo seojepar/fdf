@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 11:59:36 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 14:17:38 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	key_handler(int key, void *arg)
 		ft_close(tmp);
 	tmp->view.x += (-1) * (key == LEFT) + (key == RIGHT);
 	tmp->view.y += (-1) * (key == UP) + (key == DOWN);
-	tmp->view.scale += (-5) * (key == MINUS) + 5 * (key == PLUS);
-	tmp->view.height += (-0.2) * (key == PGDN) + 0.2 * (key == PGUP);
+	tmp->view.scale += (-1) * (key == MINUS) + 1 * (key == PLUS);
+	tmp->view.height += (-0.02) * (key == PGDN) + 0.02 * (key == PGUP);
 	reset_buf(*tmp);
 	gen_dots(tmp);
 	mlx_clear_window(tmp->mlx, tmp->win);
@@ -38,7 +38,7 @@ int	mouse_on(int button, int x, int y, void *param)
 	tmp = (t_ptr *)param;
 	if (button != 5 && button != 4)
 	{
-		tmp->view.mouse = 1;
+		tmp->view.mouse.onoff = 1;
 		mlx_hook(tmp->win, ON_MOUSEMOVE, 0, mouse_move, param);
 	}
 	tmp->view.y += (-1) * (button == 5) + (button == 4);
@@ -51,9 +51,28 @@ int	mouse_on(int button, int x, int y, void *param)
 
 int	mouse_off(int button, int x, int y, void *param)
 {
+	t_ptr	*tmp;
+
+	tmp = (t_ptr *)param;
 	if (button != 5 && button != 4)
-		((t_ptr *)param)->view.mouse = 0;
+	{
+		tmp->view.mouse.onoff = 0;
+		tmp->view.mouse.mx = -1;
+		tmp->view.mouse.mx = -1;
+	}
 	return (RET_SUC);
+}
+
+int	mouse_move(int x, int y, void *param)
+{
+	t_ptr	*tmp;
+
+	tmp = (t_ptr *)param;
+	if (tmp->view.mouse.onoff == 0)
+		return (0);
+	tmp->view.mouse.mx = x;
+	tmp->view.mouse.mx = y;
+	return (1);
 }
 
 int	ft_close(t_ptr *ptr)
@@ -63,14 +82,4 @@ int	ft_close(t_ptr *ptr)
 	free(ptr->mlx);
 	exit(1);
 	return (0);
-}
-
-int	mouse_move(int x, int y, void *param)
-{
-	t_ptr	*tmp;
-
-	tmp = (t_ptr *)param;
-	if (tmp->view.mouse == 0)
-		return (0);
-	return (1);
 }

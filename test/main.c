@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 13:20:35 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 13:37:46 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		error();
 	ptr.dots = get_dots(open(argv[1], O_RDONLY));
-	// ptr.dots = get_dots(open("./test_maps/42.fdf", O_RDONLY));
 	if (!ptr.dots)
 		error();
 	init_mlx(&ptr);

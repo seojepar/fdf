@@ -1,7 +1,7 @@
 SRC = main.c bresenham.c read_file.c utils.c event_handler.c init.c gen_color.c gen_dot.c
 TARGET = fdf
 INC = ./minilibx_macos
-CC = cc -g -fsanitize=address
+CC = gcc
 CFLAGS = -lmlx -framework OpenGL -framework AppKit
 TEST_FILES := $(wildcard test_maps/*.fdf)
 TEST_OUTPUTS := $(TEST_FILES:test_maps/%.fdf=test_output/%.out)
@@ -9,7 +9,7 @@ TEST_OUTPUTS := $(TEST_FILES:test_maps/%.fdf=test_output/%.out)
 all: $(TARGET)
 
 $(TARGET): $(SRC)
-	$(CC) -o $@ $^ -I $(INC) -L $(INC) $(CFLAGS)
+	$(CC) $^ -o $@ -I $(INC) -L $(INC) $(CFLAGS)
 
 test: $(TEST_OUTPUTS)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:42 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 12:01:40 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 13:54:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@ int	out_of_win(t_coord d1, t_coord d2)
 {
 	int	x;
 
-	x = !(0 <= d1.cx && d1.cx <= WIN_X) && !(0 <= d2.cx && d2.cx <= WIN_X);
-	x = x || (!(0 <= d1.cy && d1.cy <= WIN_Y) && !(0 <= d2.cy && d2.cy <= WIN_Y));
+	x = (!(0 <= d1.cx && d1.cx < WIN_X) \
+	&& !(0 <= d2.cx && d2.cx < WIN_X));
+	x |= (!(0 <= d1.cy && d1.cy < WIN_Y) \
+	&& !(0 <= d2.cy && d2.cy < WIN_Y));
 	return (x);
 }
 

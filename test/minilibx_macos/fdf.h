@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 12:06:39 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 14:17:32 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,16 @@ typedef struct s_dots{
 	t_coord	**dot;
 }	t_dots;
 
+typedef struct s_mouse{
+	int	mx;
+	int	my;
+	int	onoff;
+}	t_mouse;
+
 typedef struct s_view{
 	int		x;
 	int		y;
-	int		mouse;
+	t_mouse mouse;
 	int		scale;
 	float	height;
 }	t_view;
@@ -73,9 +79,9 @@ typedef struct s_ptr{
 	char	*buf;
 	t_dots	*dots;
 	t_view	view;
-	int		pix;	// pixel_bits
-	int		line;	// line_bytes
-	int		end;	// endian
+	int		pix;
+	int		line;
+	int		end;
 }	t_ptr;
 
 char	*ft_substr(char *start, char *end);

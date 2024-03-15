@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:48:00 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/10 17:02:48 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:56:59 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_0xatoi(char *str)
 	int	num;
 
 	if (*str != ',')
-		return (-1);
+		return (0xFFFFFF);
 	str += 3;
 	num = 0;
 	while (*str)
