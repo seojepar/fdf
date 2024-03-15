@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:06:03 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/14 12:14:28 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:37:44 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,27 @@ int	gen_color(t_dot d1, t_dot d2, t_dot dc, int flag)
 	ret = (ret << 8) + div_color(m, n, d1.color >> 8, d2.color >> 8);
 	ret = (ret << 8) + div_color(m, n, d1.color >> 16, d2.color >> 16);
 	return (ret);
+}
+
+void	img_pixel_put(t_ptr ptr, int x, int y, int color)
+{
+	char	*buffer;
+	int		pixel;
+
+	buffer = ptr.buf;
+	pixel = y * ptr.line + x * 4;
+	if (ptr.end == 1)
+	{
+		buffer[pixel + 0] = (color >> 24);
+		buffer[pixel + 1] = (color >> 16) & 0xFF;
+		buffer[pixel + 2] = (color >> 8) & 0xFF;
+		buffer[pixel + 3] = (color) & 0xFF;
+	}
+	else if (ptr.end == 0)
+	{
+		buffer[pixel + 0] = (color) & 0xFF;
+		buffer[pixel + 1] = (color >> 8) & 0xFF;
+		buffer[pixel + 2] = (color >> 16) & 0xFF;
+		buffer[pixel + 3] = (color >> 24);
+	}
 }
