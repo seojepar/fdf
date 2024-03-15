@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/13 18:18:25 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/14 12:13:52 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,22 @@ t_input	*get_input(int fd)
 
 void	dots_to_img(t_ptr *ptr)
 {
-	t_view	info;
 	int		i;
 	int		j;
-	t_input	*input;
 	t_dot	**dots;
 
-	info = ptr->view;
-	i = 0;
+	i = -1;
 	j = 0;
-	input = ptr->in;
-	dots = input->dot;
-	while (i < input->x)
+	dots = ptr->in->dot;
+	while (++i < ptr->in->x)
 	{
 		j = 0;
-		while (j < input->y)
+		while (j < ptr->in->y)
 		{
-			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * info.scale + WIN_X / 2;
-			dots[i][j].cx += ptr->view.x;
-			dots[i][j].cy = (i + j) * info.scale / 2 + WIN_Y / 4 - dots[i][j].z * info.height;
-			dots[i][j].cy += ptr->view.y;
+			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * ptr->view.scale;
+			dots[i][j].cx += WIN_X / 2 + ptr->view.x;
+			dots[i][j].cy = (i + j) * ptr->view.scale / 2 + WIN_Y / 4;
+			dots[i][j].cy += ptr->view.y - dots[i][j].z * ptr->view.height;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;
 			if (i > 0)
@@ -113,6 +109,5 @@ void	dots_to_img(t_ptr *ptr)
 				plot_line(dots[i][j - 1], dots[i][j], *ptr);
 			j++;
 		}
-		i++;
 	}
 }

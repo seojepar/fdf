@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/11 17:30:33 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/14 12:22:10 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ t_input	*get_input(int fd);
 void	save_dots(char *buf, t_input *info);
 int		init_info(t_input *info);
 void	reset_buf(t_ptr ptr);
+int		out_of_win(t_dot d1, t_dot d2);
 
+int		div_color(int m, int n, int c1, int c2);
+int		gen_color(t_dot d1, t_dot d2, t_dot dc, int flag);
 
 #endif

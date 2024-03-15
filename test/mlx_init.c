@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/10 17:03:02 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:54:37 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 void	hooks(t_ptr	ptr)
 {
 	mlx_key_hook(ptr.win, key_handler, &ptr);
-	mlx_expose_hook(ptr.win, expose_handler, &ptr);
-	mlx_hook(ptr.win, ON_DESTROY, 0, ft_close, &ptr);
 	mlx_mouse_hook(ptr.win, mouse_on, &ptr);
 	mlx_hook(ptr.win, ON_MOUSEUP, 0, mouse_off, &ptr);
+	mlx_hook(ptr.win, ON_DESTROY, 0, ft_close, &ptr);
 	mlx_loop(ptr.mlx);
 }
 
