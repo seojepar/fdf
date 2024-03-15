@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   gen_dot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/14 12:13:52 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:55:27 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_input	*get_input(int fd)
 	return (info);
 }
 
-void	dots_to_img(t_ptr *ptr)
+void	gen_dot(t_ptr *ptr)
 {
 	int		i;
 	int		j;
@@ -98,8 +98,8 @@ void	dots_to_img(t_ptr *ptr)
 		while (j < ptr->in->y)
 		{
 			dots[i][j].cx = (sqrt(3) * (i - j) / 2) * ptr->view.scale;
-			dots[i][j].cx += WIN_X / 2 + ptr->view.x;
-			dots[i][j].cy = (i + j) * ptr->view.scale / 2 + WIN_Y / 4;
+			dots[i][j].cx += ptr->view.x;
+			dots[i][j].cy = (i + j) * SCALE * ptr->view.scale / 2;
 			dots[i][j].cy += ptr->view.y - dots[i][j].z * ptr->view.height;
 			if (dots[i][j].color < 0)
 				dots[i][j].color = 0xFFFFFF;

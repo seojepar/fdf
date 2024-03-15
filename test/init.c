@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/14 10:54:37 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:56:08 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_mlx(t_ptr *ptr)
 	ptr->win = mlx_new_window(ptr->mlx, 1200, 1200, "Power Code");
 	ptr->img = mlx_new_image(ptr->mlx, 1200, 1200);
 	ptr->buf = mlx_get_data_addr(ptr->img, &ptr->pix, &ptr->line, &ptr->end);
-	ptr->view.x = 0;
-	ptr->view.y = 0;
+	ptr->view.x = WIN_X / 2;
+	ptr->view.y = WIN_Y / 2;
 	ptr->view.scale = 40;
 	ptr->view.height = 3.5;
 }

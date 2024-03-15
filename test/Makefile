@@ -1,4 +1,4 @@
-SRC = main.c bresenham.c read_file.c utils.c event_handler.c mlx_init.c image.c start.c color.c
+SRC = main.c bresenham.c read_file.c utils.c event_handler.c init.c gen_color.c gen_dot.c
 TARGET = fdf
 INC = ./minilibx_macos
 CC = cc -g -fsanitize=address

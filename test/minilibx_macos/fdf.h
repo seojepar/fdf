@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/14 12:22:10 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/15 11:53:21 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define PGUP 116
 # define MINUS 27
 # define PLUS 24
+# define SCALE 40
 
 # define INPUT_ERR	 	0
 # define RET_SUC 		1
@@ -77,7 +78,6 @@ typedef struct s_ptr{
 	int		end; // endian
 }	t_ptr;
 
-
 char	*ft_substr(char *start, char *end);
 int		ft_strlen(char *str);
 char	*ft_strcat(char *s1, char *s2);
@@ -85,7 +85,7 @@ int		ft_0xatoi(char *str);
 int		ft_atoi(char **str);
 void	ft_switch(int *a, int *b);
 
-void	dots_to_img(t_ptr *ptr);
+void	gen_dot(t_ptr *ptr);
 void	plot_dot(t_dot d, t_ptr ptr);
 void	plot_line_high(t_dot d1, t_dot d2, t_ptr ptr);
 void	plot_line_low(t_dot d1, t_dot d2, t_ptr ptr);
@@ -105,7 +105,7 @@ int		mouse_off(int button, int x, int y, void *param);
 int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
 int		mouse_move(int x, int y, void *param);
-void	dots_to_img(t_ptr *ptr);
+void	gen_dot(t_ptr *ptr);
 t_input	*get_input(int fd);
 void	save_dots(char *buf, t_input *info);
 int		init_info(t_input *info);
