@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 14:17:38 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:55:36 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int	ft_close(t_ptr *ptr)
 	mlx_destroy_image(ptr->mlx, ptr->img);
 	mlx_destroy_window(ptr->mlx, ptr->win);
 	free(ptr->mlx);
-	exit(1);
+	error("Window closed", 1);
 	return (0);
 }
