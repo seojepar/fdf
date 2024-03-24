@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main copy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 13:01:24 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:00:13 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (0);
-	ptr.dots = get_dots(open(argv[1], O_RDONLY));
+	ptr.dots = store(open(argv[1], O_RDONLY));
 	if (!ptr.dots)
 		error("Incorrect file format", 0);
 	init_mlx(&ptr);

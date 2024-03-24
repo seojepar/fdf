@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 13:01:45 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:00:13 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
 int		mouse_move(int x, int y, void *param);
 void	gen_dots(t_ptr *ptr);
-t_dots	*get_dots(int fd);
+t_dots	*store(int fd);
 void	save_dots(char *buf, t_dots *info);
 int		init_info(t_dots *info);
 void	reset_buf(t_ptr ptr);
