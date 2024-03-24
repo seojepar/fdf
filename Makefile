@@ -1,25 +1,26 @@
+SRCS = init.c main.c linedraw.c read_file.c utils.c loop.c color.c save.c
+OBJS = $(SRCS:.c=.o)
+NAME = fdf
+INC = ./minilibx_macos
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ./utils/get_next_line.c \
-		./utils/get_next_line_utils.c \
-		./utils/ft_split.c \
-		./utils/ft_atoi.c \
-		./utils/ft_substr.c \
-		./utils/ft_strlcpy.c
-INC = ./utils
-OBJS = $(SRCS:.c=.o)
-NAME = fdf.a
+TAGS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
+
 $(NAME): $(OBJS)
-	ar -cr $(NAME) $^
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
+	$(CC) $^ -o $@ -I $(INC) -L $(INC) $(TAGS)
+
+.c.o: $(SRCS)
+	$(CC) $(CFLAGS) -c $< -I $(INC)
+
 clean:
 	rm -f $(OBJS)
-fclean: 
+
+fclean:
 	make clean
 	rm -f $(NAME)
+
 re:
 	make fclean
 	make all
