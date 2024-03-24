@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 14:13:45 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:02:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	hooks(t_ptr	ptr)
 	mlx_loop(ptr.mlx);
 }
 
-void	init_mlx(t_ptr *ptr)
+void	init(t_ptr *ptr)
 {
 	ptr->mlx = mlx_init();
 	ptr->win = mlx_new_window(ptr->mlx, 1200, 1200, "Power Code");

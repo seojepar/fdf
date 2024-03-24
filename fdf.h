@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 17:00:13 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:02:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*ft_strjoin(char *a, char *b);
 char	*read_file(int fd);
 int		mouse_move(int x, int y, void *param);
 void	event_handler(t_ptr	ptr);
-void	init_mlx(t_ptr *ptr);
+void	init(t_ptr *ptr);
 
 int		key_handler(int key, void *arg);
 int		mouse_on(int button, void *param);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main copy.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 17:00:13 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:02:17 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char *argv[])
 	ptr.dots = store(open(argv[1], O_RDONLY));
 	if (!ptr.dots)
 		error("Incorrect file format", 0);
-	init_mlx(&ptr);
+	init(&ptr);
 	gen_dots(&ptr);
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 0, 0);
 	event_handler(ptr);
