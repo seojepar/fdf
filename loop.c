@@ -6,34 +6,30 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 17:18:54 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:21:04 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-int	key_handler(int key, void *param)
+int	key_dn(int key, void *param)
 {
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
 	ptr->view.mk.keyon = 1;
-	while(ptr->view.mk.keyon)
-	{
-		if (key == ESC)
-			ft_close(ptr);
-		ptr->view.x += (-1) * (key == LEFT) + (key == RIGHT);
-		ptr->view.y += (-1) * (key == UP) + (key == DOWN);
-		ptr->view.scale += (-1) * (key == MINUS) + 1 * (key == PLUS);
-		ptr->view.height += (-0.02) * (key == PGDN) + 0.02 * (key == PGUP);
-		reset_buf(*ptr);
-		make_img(ptr);
-		mlx_clear_window(ptr->mlx, ptr->win);
-		mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
-	}
+	if (key == ESC)
+		ft_close(ptr);
+	ptr->view.x += (-1) * (key == LEFT) + (key == RIGHT);
+	ptr->view.y += (-1) * (key == UP) + (key == DOWN);
+	ptr->view.scale += (-1) * (key == MINUS) + 1 * (key == PLUS);
+	if (ptr->view.scale <= 0)
+		ptr->view.scale = 0;
+	ptr->view.height += (-0.02) * (key == PGDN) + 0.02 * (key == PGUP);
 	return (1);
 }
+
 
 int	mouse_on(int button, void *param)
 {
@@ -43,13 +39,8 @@ int	mouse_on(int button, void *param)
 	if (button != SCROLL_DN && button != SCROLL_UP)
 	{
 		ptr->view.mk.mouseon = 1;
-		mlx_hook(ptr->win, ON_MOUSEMOVE, 0, mouse_move, param);
 	}
-	ptr->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
-	reset_buf(*ptr);
-	make_img(ptr);
-	mlx_clear_window(ptr->mlx, ptr->win);
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
+	// ptr->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
 	return (1);
 }
 
@@ -58,12 +49,13 @@ int	mouse_off(int button, void *param)
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
-	if (button != 5 && button != 4)
-	{
-		ptr->view.mk.mouseon = 0;
-		ptr->view.mk.mx = -1;
-		ptr->view.mk.mx = -1;
-	}
+	button++;
+	// if (button != 5 && button != 4)
+	// {
+	// 	ptr->view.mk.mouseon = 0;
+	// 	ptr->view.mk.mx = -1;
+	// 	ptr->view.mk.mx = -1;
+	// }
 	return (RET_SUC);
 }
 
@@ -76,6 +68,7 @@ int	mouse_move(int x, int y, void *param)
 		return (0);
 	ptr->view.mk.mx = x;
 	ptr->view.mk.mx = y;
+	printf("MOUSE MOVE, %d %d\n", x, y);
 	return (1);
 }
 
@@ -88,10 +81,3 @@ int	ft_close(t_ptr *ptr)
 	return (0);
 }
 
-int key_up(void *param){
-	t_ptr	*ptr;
-	
-	ptr = (t_ptr *)param;
-	ptr->view.mk.keyon = 0;
-	return (0);
-}

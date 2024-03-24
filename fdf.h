@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 17:19:10 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:18:48 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define PLUS 24
 # define SCALE 40
 
+# define ON  1
+# define OFF 0
+
 # define SCROLL_DN 5
 # define SCROLL_UP   4
 
@@ -40,6 +43,7 @@
 # define RET_ERR 		0
 # define ON_KEYDOWN		2
 # define ON_KEYUP		3
+# define ON_MOUSEDN		4
 # define ON_MOUSEMOVE	6
 # define ON_MOUSEUP		5
 # define ON_DESTROY		17
@@ -66,6 +70,7 @@ typedef struct s_mk{
 	int	my;
 	int	mouseon;
 	int keyon;
+	int key;
 }	t_mk;
 
 typedef struct s_view{
@@ -109,8 +114,8 @@ int		mouse_move(int x, int y, void *param);
 void	events(t_ptr	ptr);
 void	init(t_ptr *ptr);
 
-int		key_handler(int key, void *arg);
-int		key_up(void *param);
+int		key_dn(int keycode, void *arg);
+int		key_up(int keycode, void *param);
 int		mouse_on(int button, void *param);
 int		mouse_off(int button, void *param);
 int		expose_handler(void *param);
@@ -125,5 +130,8 @@ int		out_of_win(t_coord d1, t_coord d2);
 
 int		div_color(int m, int n, int c1, int c2);
 int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
+
+int		main_loop(t_ptr *ptr);
+
 
 #endif
