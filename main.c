@@ -6,18 +6,12 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 17:02:17 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:05:30 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
-
-void	error(char *msg, int code)
-{
-	printf("Error: %s\n", msg);
-	exit(code);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -27,10 +21,10 @@ int	main(int argc, char *argv[])
 		return (0);
 	ptr.dots = store(open(argv[1], O_RDONLY));
 	if (!ptr.dots)
-		error("Incorrect file format", 0);
+		exit(0);
 	init(&ptr);
-	gen_dots(&ptr);
+	make_img(&ptr);
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 0, 0);
-	event_handler(ptr);
+	events(ptr);
 	return (0);
 }

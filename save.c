@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 17:00:13 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:05:30 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	gen_dot(t_ptr *ptr, int i, int j)
 	dots[i][j].cy += ptr->view.y;
 }
 
-void	gen_dots(t_ptr *ptr)
+void	make_img(t_ptr *ptr)
 {
 	int		i;
 	int		j;

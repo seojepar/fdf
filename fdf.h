@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 17:02:17 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:19:10 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,17 @@ typedef struct s_dots{
 	t_coord	**dot;
 }	t_dots;
 
-typedef struct s_mouse{
+typedef struct s_mk{
 	int	mx;
 	int	my;
-	int	onoff;
-}	t_mouse;
+	int	mouseon;
+	int keyon;
+}	t_mk;
 
 typedef struct s_view{
 	int		x;
 	int		y;
-	t_mouse mouse;
+	t_mk	mk;
 	int		scale;
 	float	height;
 }	t_view;
@@ -94,7 +95,7 @@ int		ft_0xatoi(char *str);
 int		ft_atoi(char **str);
 void	ft_switch(int *a, int *b);
 
-void	gen_dots(t_ptr *ptr);
+void	make_img(t_ptr *ptr);
 void	plot_coord(t_coord d, t_ptr ptr);
 void	plot_line_high(t_coord d1, t_coord d2, t_ptr ptr);
 void	plot_line_low(t_coord d1, t_coord d2, t_ptr ptr);
@@ -105,16 +106,17 @@ int		get_xy(char	*file, t_dots *info);
 char	*ft_strjoin(char *a, char *b);
 char	*read_file(int fd);
 int		mouse_move(int x, int y, void *param);
-void	event_handler(t_ptr	ptr);
+void	events(t_ptr	ptr);
 void	init(t_ptr *ptr);
 
 int		key_handler(int key, void *arg);
+int		key_up(void *param);
 int		mouse_on(int button, void *param);
 int		mouse_off(int button, void *param);
 int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
 int		mouse_move(int x, int y, void *param);
-void	gen_dots(t_ptr *ptr);
+void	make_img(t_ptr *ptr);
 t_dots	*store(int fd);
 void	save_dots(char *buf, t_dots *info);
 int		init_info(t_dots *info);
@@ -123,6 +125,5 @@ int		out_of_win(t_coord d1, t_coord d2);
 
 int		div_color(int m, int n, int c1, int c2);
 int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
-void	error(char *msg, int code);
 
 #endif
