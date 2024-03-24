@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:27:14 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/20 11:00:46 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:01:24 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int argc, char *argv[])
 	init_mlx(&ptr);
 	gen_dots(&ptr);
 	mlx_put_image_to_window(ptr.mlx, ptr.win, ptr.img, 0, 0);
-	hooks(ptr);
+	event_handler(ptr);
 	return (0);
 }

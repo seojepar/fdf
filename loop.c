@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_handler.c                                    :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/20 10:55:36 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:01:41 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,26 @@ int	key_handler(int key, void *arg)
 	return (1);
 }
 
-int	mouse_on(int button, int x, int y, void *param)
+int	mouse_on(int button, void *param)
 {
 	t_ptr	*tmp;
 
 	tmp = (t_ptr *)param;
-	if (button != 5 && button != 4)
+	if (button != SCROLL_DN && button != SCROLL_UP)
 	{
 		tmp->view.mouse.onoff = 1;
 		mlx_hook(tmp->win, ON_MOUSEMOVE, 0, mouse_move, param);
 	}
-	tmp->view.y += (-1) * (button == 5) + (button == 4);
+	tmp->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
 	reset_buf(*tmp);
 	gen_dots(tmp);
 	mlx_clear_window(tmp->mlx, tmp->win);
 	mlx_put_image_to_window(tmp->mlx, tmp->win, tmp->img, 0, 0);
+	
 	return (1);
 }
 
-int	mouse_off(int button, int x, int y, void *param)
+int	mouse_off(int button, void *param)
 {
 	t_ptr	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/15 14:03:18 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:48:10 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*ft_strjoin(char *a, char *b)
 {
-	int		len;
 	char	*ret;
 	int		i;
 	int		j;
