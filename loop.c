@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 18:21:04 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:48:09 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,41 @@ int	key_dn(int key, void *param)
 }
 
 
-int	mouse_on(int button, void *param)
+int	mouse_on(int button, int x, int y, void *param)
 {
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
 	if (button != SCROLL_DN && button != SCROLL_UP)
-	{
 		ptr->view.mk.mouseon = 1;
-	}
-	// ptr->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
-	return (1);
-}
-
-int	mouse_off(int button, void *param)
-{
-	t_ptr	*ptr;
-
-	ptr = (t_ptr *)param;
-	button++;
-	// if (button != 5 && button != 4)
-	// {
-	// 	ptr->view.mk.mouseon = 0;
-	// 	ptr->view.mk.mx = -1;
-	// 	ptr->view.mk.mx = -1;
-	// }
-	return (RET_SUC);
-}
-
-int	mouse_move(int x, int y, void *param)
-{
-	t_ptr	*ptr;
-
-	ptr = (t_ptr *)param;
-	if (ptr->view.mk.mouseon == 0)
-		return (0);
+	ptr->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
 	ptr->view.mk.mx = x;
-	ptr->view.mk.mx = y;
-	printf("MOUSE MOVE, %d %d\n", x, y);
+	ptr->view.mk.my = y;
 	return (1);
 }
+
+// int	mouse_off(int button, void *param)
+// {
+// 	t_ptr	*ptr;
+
+// 	ptr = (t_ptr *)param;
+// 	if (button != 5 && button != 4)
+// 		ptr->view.mk.mouseon = 0;
+// 	return (RET_SUC);
+// }
+
+// int	mouse_move(int x, int y, void *param)
+// {
+// 	t_ptr	*ptr;
+
+// 	ptr = (t_ptr *)param;
+// 	if (ptr->view.mk.mouseon == 0)
+// 		return (0);
+// 	ptr->view.mk.mx = x;
+// 	ptr->view.mk.mx = y;
+// 	printf("MOUSE MOVE, %d %d\n", x, y);
+// 	return (1);
+// }
 
 int	ft_close(t_ptr *ptr)
 {

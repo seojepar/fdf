@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/24 18:18:48 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:48:24 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	init(t_ptr *ptr);
 
 int		key_dn(int keycode, void *arg);
 int		key_up(int keycode, void *param);
-int		mouse_on(int button, void *param);
+int		mouse_on(int button, int x, int y, void *param);
 int		mouse_off(int button, void *param);
 int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
