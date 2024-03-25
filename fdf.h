@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/25 20:48:24 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/25 21:41:18 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@
 # define WIN_X 1200
 # define WIN_Y 1200
 
+typedef struct s_vect{
+	double	x;
+	double	y;
+}	t_vect;
+
 typedef struct s_coord{
 	int	cx;
 	int	cy;
@@ -66,6 +71,8 @@ typedef struct s_dots{
 }	t_dots;
 
 typedef struct s_mk{
+	int ox;
+	int oy;
 	int	mx;
 	int	my;
 	int	mouseon;
@@ -117,7 +124,7 @@ void	init(t_ptr *ptr);
 int		key_dn(int keycode, void *arg);
 int		key_up(int keycode, void *param);
 int		mouse_on(int button, int x, int y, void *param);
-int		mouse_off(int button, void *param);
+int		mouse_off(int button, int x, int y, void *param);
 int		expose_handler(void *param);
 int		ft_close(t_ptr *ptr);
 int		mouse_move(int x, int y, void *param);
@@ -133,5 +140,6 @@ int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
 
 int		main_loop(t_ptr *ptr);
 
+void	rotate(int x, int y, double *i, double *j,t_ptr *ptr);
 
 #endif

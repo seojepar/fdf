@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 18:09:05 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:33:55 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,27 @@ t_dots	*store(int fd)
 	return (info);
 }
 
-void	gen_dot(t_ptr *ptr, int i, int j)
+void	gen_dot(t_ptr *ptr, int x, int y)
 {
 	t_coord	**dots;
 	float	z;
 	float	di;
 	float	dj;
+	double	i;
+	double	j;
 
 	dots = ptr->dots->dot;
-	z = dots[i][j].z * ptr->view.height;
+	i = (double)x;
+	j = (double)y;
+	if (ptr->view.mk.mouseon == ON)
+		rotate(x,y,&i,&j,ptr);
+	z = dots[x][y].z * ptr->view.height;
 	di = i - ptr->dots->x / 2;
 	dj = j - ptr->dots->y / 2;
-	dots[i][j].cx = sqrt(3) * (di - dj) / 2 * ptr->view.scale;
-	dots[i][j].cx += ptr->view.x;
-	dots[i][j].cy = ((di + dj) / 2 - z) * ptr->view.scale;
-	dots[i][j].cy += ptr->view.y;
+	dots[x][y].cx = sqrt(3) * (di - dj) / 2 * ptr->view.scale;
+	dots[x][y].cx += ptr->view.x;
+	dots[x][y].cy = ((di + dj) / 2 - z) * ptr->view.scale;
+	dots[x][y].cy += ptr->view.y;
 }
 
 void	make_img(t_ptr *ptr)

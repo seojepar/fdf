@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 18:21:08 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:12:52 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	events(t_ptr	ptr)
 {
 	mlx_hook(ptr.win, ON_KEYDOWN, 0, key_dn, &ptr);
 	mlx_hook(ptr.win, ON_MOUSEDN, 0, mouse_on, &ptr);
-	// mlx_hook(ptr.win, ON_MOUSEUP, 0, mouse_off, &ptr);
+	mlx_hook(ptr.win, ON_MOUSEUP, 0, mouse_off, &ptr);
+	mlx_hook(ptr.win, ON_MOUSEMOVE, 0, mouse_move, &ptr);
 	mlx_hook(ptr.win, ON_DESTROY, 0, ft_close, &ptr);
 	mlx_loop_hook(ptr.mlx, main_loop, &ptr);
 	mlx_loop(ptr.mlx);
@@ -35,6 +36,8 @@ void	init(t_ptr *ptr)
 	ptr->view.height = 0.12;
 	ptr->view.mk.mx = -1;
 	ptr->view.mk.mx = -1;
+	ptr->view.mk.mouseon = OFF;
+	ptr->view.mk.keyon = OFF;
 }
 
 void	reset_buf(t_ptr ptr)
