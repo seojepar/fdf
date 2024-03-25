@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:07 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/25 21:12:52 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/25 22:09:29 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	reset_buf(t_ptr ptr)
 int	main_loop(t_ptr *ptr)
 {
 	reset_buf(*ptr);
+	if (ptr->view.mk.mouseon == ON)
+		update_angle(ptr);
 	make_img(ptr);
 	mlx_clear_window(ptr->mlx, ptr->win);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);

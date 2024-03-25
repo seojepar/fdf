@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/25 21:41:18 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/25 22:09:57 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ typedef struct s_dots{
 }	t_dots;
 
 typedef struct s_mk{
-	int ox;
-	int oy;
-	int	mx;
-	int	my;
-	int	mouseon;
-	int keyon;
-	int key;
+	int		ox;
+	int		oy;
+	int		mx;
+	int		my;
+	double	angle;
+	int		mouseon;
+	int 	keyon;
+	int 	key;
 }	t_mk;
 
 typedef struct s_view{
@@ -140,6 +141,7 @@ int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
 
 int		main_loop(t_ptr *ptr);
 
-void	rotate(int x, int y, double *i, double *j,t_ptr *ptr);
+void	rotate(double x, double y, double *i, double *j,t_ptr *ptr);
+void	update_angle(t_ptr *ptr);
 
 #endif
