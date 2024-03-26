@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/25 22:17:05 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/26 15:01:44 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	mouse_on(int button, int x, int y, void *param)
 		ptr->view.mk.mouseon = ON;
 		ptr->view.mk.ox = x;
 		ptr->view.mk.oy = y;
+		ptr->view.mk.mx = x;
+		ptr->view.mk.my = y;
 	}
 	ptr->view.y += (-1) * (button == SCROLL_DN) + (button == SCROLL_UP);
 	return (RET_SUC);
@@ -64,11 +66,11 @@ int	mouse_move(int x, int y, void *param)
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
+	printf("MOUSEMOVE");
 	if (ptr->view.mk.mouseon == OFF)
 		return (0);
-	printf("mx: %d my: %d\n",x, y);
 	ptr->view.mk.mx = x;
-	ptr->view.mk.mx = y;
+	ptr->view.mk.my = y;
 	return (RET_SUC);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 21:15:25 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/25 22:14:35 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/26 15:01:49 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,21 @@ int	vect_ip(t_vect A, t_vect B){
 	return (A.x * B.x + A.y * B.y);
 }
 
-double	get_angle(t_vect A, t_vect B){
-	return (asin(vect_ip(A, B) / (vect_size(A) * vect_size(B))));
+double	get_angle(t_vect A, t_vect B, t_view view){
+	double	dx;
+	double	dy;
+	double	angle;
+
+	angle = acos(vect_ip(A, B) / (vect_size(A) * vect_size(B)));
+	dx = A.x - view.x;
+	dy = A.y - view.y;
+	if (dy == 0){
+		if (B.y < A.y)
+			angle = 2 * M_PI - angle;	
+	}
+	else if ((B.x - view.x) * dy / dx + view.y > B.y)
+		angle = 2 * M_PI - angle;
+	return (angle);
 }
 
 void rotate(double x, double y, double *i, double *j,t_ptr *ptr){
@@ -59,9 +72,6 @@ void	update_angle(t_ptr *ptr){
 	}
 	V1 = make_vect(ptr->view.mk.ox, ptr->view.mk.oy, ptr);
 	V2 = make_vect(ptr->view.mk.mx, ptr->view.mk.my, ptr);
-	ptr->view.mk.angle = get_angle(V1, V2);
-	printf("기준벡터 V1.x: %f, V1.y: %f\n",V1.x, V1.y);
-	printf("변위벡터 V2.x: %f, V2.y: %f\n",V2.x, V2.y);
-	// V2.x 값이 이상함을 발견하였다.
+	ptr->view.mk.angle = get_angle(V1, V2, ptr->view);
 	printf("THE FUCKING ANGLE IS %f\n", ptr->view.mk.angle * 180 / 3.1415);
 }
