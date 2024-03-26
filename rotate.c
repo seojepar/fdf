@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 21:15:25 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/26 15:01:49 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:08:20 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ double	get_angle(t_vect A, t_vect B, t_view view){
 
 	angle = acos(vect_ip(A, B) / (vect_size(A) * vect_size(B)));
 	dx = A.x - view.x;
-	dy = A.y - view.y;
-	if (dy == 0){
+	dy = A.y - view.y; 
+	if (dx == 0){
 		if (B.y < A.y)
 			angle = 2 * M_PI - angle;	
 	}
-	else if ((B.x - view.x) * dy / dx + view.y > B.y)
+	else if ((B.x - view.x) * dy / dx + view.y > B.y){
+		printf("angle change bro!\n");
 		angle = 2 * M_PI - angle;
+	}
 	return (angle);
 }
 

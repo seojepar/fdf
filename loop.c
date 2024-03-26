@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/26 15:01:44 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:06:19 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	mouse_move(int x, int y, void *param)
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
-	printf("MOUSEMOVE");
 	if (ptr->view.mk.mouseon == OFF)
 		return (0);
 	ptr->view.mk.mx = x;
