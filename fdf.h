@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/25 22:09:57 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/27 13:20:35 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,9 @@ int		main_loop(t_ptr *ptr);
 
 void	rotate(double x, double y, double *i, double *j,t_ptr *ptr);
 void	update_angle(t_ptr *ptr);
+
+t_vect	make_vect(double cx, double cy, t_ptr *ptr);
+double	vect_size(t_vect A);
+int		vect_ip(t_vect A, t_vect B);
 
 #endif
