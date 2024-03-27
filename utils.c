@@ -6,29 +6,11 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:48:00 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/27 13:21:41 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:19:27 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-char	*ft_substr(char *start, char *end)
-{
-	char	*out;
-	int		i;
-
-	out = (char *)malloc(end - start + 2);
-	if (!out)
-		return (NULL);
-	i = 0;
-	while (start + i <= end)
-	{
-		*(out + i) = *(start + i);
-		i++;
-	}
-	*(out + i) = '\0';
-	return (out);
-}
 
 int	ft_strlen(char *str)
 {

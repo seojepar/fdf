@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/27 13:39:56 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:19:30 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_mk{
 	int		my;
 	double	angle;
 	int		mouseon;
-	int 	keyon;
-	int 	key;
+	int		keyon;
+	int		key;
 }	t_mk;
 
 typedef struct s_view{
@@ -101,7 +101,6 @@ typedef struct s_ptr{
 	int		end;
 }	t_ptr;
 
-char	*ft_substr(char *start, char *end);
 int		ft_strlen(char *str);
 char	*ft_strcat(char *s1, char *s2);
 int		ft_0xatoi(char *str);

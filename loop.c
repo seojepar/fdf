@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/27 13:25:58 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:27:06 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,19 @@ int	mouse_move(int x, int y, void *param)
 
 int	ft_close(t_ptr *ptr)
 {
-	mlx_destroy_image(ptr->mlx, ptr->img);
+	int		i;
+	t_coord	**dot;
+
+	dot = ptr->dots->dot;
+	i = 0;
+	while(i < ptr->dots->x)
+	{
+		free(dot[i]);
+		i++;
+	}
+	free(dot);
 	mlx_destroy_window(ptr->mlx, ptr->win);
+	mlx_destroy_image(ptr->mlx, ptr->img);
 	free(ptr->mlx);
 	exit(1);
 	return (RET_SUC);

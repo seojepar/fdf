@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/27 13:40:20 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:11:26 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,22 @@ int	init_info(t_dots *info)
 	y = info->y;
 	info->dot = (t_coord **)malloc(sizeof(t_coord *) * x);
 	if (!info->dot)
-		return (0);
+		return (RET_ERR);
 	i = 0;
 	while (i < x)
 	{
 		info->dot[i] = (t_coord *)malloc(sizeof(t_coord) * y);
 		if (!info->dot[i])
-			return (0);
+		{
+			while(i >= 0)
+				free(info->dot[i--]);
+			free(info->dot);
+			free(info);
+			return (RET_ERR);
+		}
 		i++;
 	}
-	return (1);
+	return (RET_SUC);
 }
 
 void	save_dots(char *buf, t_dots *info)
@@ -71,15 +77,15 @@ t_dots	*store(int fd)
 
 	buf = read_file(fd);
 	if (!buf)
-		return (0);
+		return (RET_ERR);
 	info = malloc(sizeof(t_dots));
-	if (!info)
-		return (0);
-	if (!get_xy(buf, info))
-		return (0);
-	if (!init_info(info))
-		return (0);
+	if (!info || !get_xy(buf, info) || !init_info(info))
+	{
+		free(buf);
+		return (RET_ERR);
+	}
 	save_dots(buf, info);
+	free(buf);
 	return (info);
 }
 

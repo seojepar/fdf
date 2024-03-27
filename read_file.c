@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/24 12:48:10 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:11:10 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,10 @@ int	get_xy(char	*file, t_dots *info)
 		{
 			total_count += row_x;
 			if (row_x != info->x)
+			{
+				free(info);
 				return (INPUT_ERR);
+			}
 			row_x = 0;
 		}
 		is_sp = ((*file == ' ') || (*file == '\n'));
