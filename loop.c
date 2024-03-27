@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/26 15:06:19 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:25:58 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	key_dn(int key, void *param)
 	return (RET_SUC);
 }
 
-
 int	mouse_on(int button, int x, int y, void *param)
 {
 	t_ptr	*ptr;
 
 	ptr = (t_ptr *)param;
-	if (button != SCROLL_DN && button != SCROLL_UP){
+	if (button != SCROLL_DN && button != SCROLL_UP)
+	{
 		ptr->view.mk.mouseon = ON;
 		ptr->view.mk.ox = x;
 		ptr->view.mk.oy = y;
@@ -81,4 +81,3 @@ int	ft_close(t_ptr *ptr)
 	exit(1);
 	return (RET_SUC);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
+/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/25 21:33:55 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/03/27 13:40:20 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,20 @@ void	gen_dot(t_ptr *ptr, int x, int y)
 {
 	t_coord	**dots;
 	float	z;
-	float	di;
-	float	dj;
-	double	i;
-	double	j;
+	double	d[2];
+	double	i[2];
 
 	dots = ptr->dots->dot;
-	i = (double)x;
-	j = (double)y;
+	i[0] = (double)x;
+	i[1] = (double)y;
 	if (ptr->view.mk.mouseon == ON)
-		rotate(x,y,&i,&j,ptr);
+		rotate(x, y, i, ptr);
 	z = dots[x][y].z * ptr->view.height;
-	di = i - ptr->dots->x / 2;
-	dj = j - ptr->dots->y / 2;
-	dots[x][y].cx = sqrt(3) * (di - dj) / 2 * ptr->view.scale;
+	d[0] = i[0] - ptr->dots->x / 2;
+	d[1] = i[1] - ptr->dots->y / 2;
+	dots[x][y].cx = sqrt(3) * (d[0] - d[1]) / 2 * ptr->view.scale;
 	dots[x][y].cx += ptr->view.x;
-	dots[x][y].cy = ((di + dj) / 2 - z) * ptr->view.scale;
+	dots[x][y].cy = ((d[0] + d[1]) / 2 - z) * ptr->view.scale;
 	dots[x][y].cy += ptr->view.y;
 }
 

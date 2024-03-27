@@ -6,7 +6,7 @@
 /*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/27 13:20:35 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:39:56 by seojepar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		gen_color(t_coord d1, t_coord d2, t_coord dc, int flag);
 
 int		main_loop(t_ptr *ptr);
 
-void	rotate(double x, double y, double *i, double *j,t_ptr *ptr);
+void	rotate(double x, double y, double *i, t_ptr *ptr);
 void	update_angle(t_ptr *ptr);
 
 t_vect	make_vect(double cx, double cy, t_ptr *ptr);

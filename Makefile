@@ -1,4 +1,4 @@
-SRCS = init.c main.c linedraw.c read_file.c utils.c loop.c color.c save.c rotate.c
+SRCS = init.c main.c linedraw.c read_file.c utils.c loop.c color.c save.c rotate.c vector.c
 OBJS = $(SRCS:.c=.o)
 NAME = fdf
 INC = ./minilibx_macos
