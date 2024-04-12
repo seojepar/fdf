@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_color.c                                        :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:06:03 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/15 12:01:40 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/04/12 14:14:25 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	img_pixel_put(t_ptr ptr, int x, int y, int color)
 	int		pixel;
 
 	buffer = ptr.buf;
-	pixel = y * ptr.line + x * 4;
+	pixel = y * ptr.line + x * ptr.pix / 8;
 	if (ptr.end == 1)
 	{
 		buffer[pixel + 0] = (color >> 24);
@@ -57,6 +57,7 @@ void	img_pixel_put(t_ptr ptr, int x, int y, int color)
 	}
 	else if (ptr.end == 0)
 	{
+		// *(unsigned int *)buffer = color & 0x00ffffff;
 		buffer[pixel + 0] = (color) & 0xFF;
 		buffer[pixel + 1] = (color >> 8) & 0xFF;
 		buffer[pixel + 2] = (color >> 16) & 0xFF;

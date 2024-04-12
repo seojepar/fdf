@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/04/09 13:05:02 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/04/12 13:07:28 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	get_xy(char	*file, t_dots *info)
 		if (*file == '\n')
 		{
 			total_count += row_x;
-			if (row_x != info->x)
+			if (row_x != 0 && row_x != info->x)
 			{
 				free(info);
 				return (INPUT_ERR);
