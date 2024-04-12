@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/27 14:11:10 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:05:02 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,26 +79,33 @@ char	*read_file(int fd)
 	return (out);
 }
 
-int	get_x(char *file)
-{
-	int	x;
-	int	is_sp;
+int is_blank(char c){
+	return ((9 <= c && c <= 13) || (c == 32));
+}
 
-	x = 0;
+int get_x(char *file, t_dots *info){
+	int	is_sp;
+	int	exist_flag;
+	int	cnt;
+
 	is_sp = 1;
+	exist_flag = 0;
+	cnt = 0;
 	while (*file)
 	{
-		if (is_sp && !((*file == ' ') || (*file == '\n')))
-			x++;
-		is_sp = ((*file == ' ') || (*file == '\n'));
-		if (*file == '\n')
-		{
-			file++;
-			break ;
+		if (is_sp && !is_blank(*file))
+			cnt++;
+		if (exist_flag && *file == '\n'){
+			info->x = cnt;
+			return (cnt);
 		}
+		if (!exist_flag && !is_blank(*file))
+			exist_flag = 1;
+		is_sp = is_blank(*file);
 		file++;
 	}
-	return (x);
+	info->x = cnt;
+	return (cnt);
 }
 
 int	get_xy(char	*file, t_dots *info)
@@ -107,7 +114,8 @@ int	get_xy(char	*file, t_dots *info)
 	int	row_x;
 	int	total_count;
 
-	info->x = get_x(file);
+	if (!get_x(file, info))
+		return (RET_ERR);
 	row_x = 0;
 	is_sp = 1;
 	total_count = 0;
