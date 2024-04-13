@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:47:16 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/04/13 15:09:23 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_dots	*store(int fd)
 	if (!info || !get_xy(buf, info) || !init_info(info))
 	{
 		free(buf);
+		if (info)
+			free(info);
 		return (RET_ERR);
 	}
 	save_dots(buf, info);

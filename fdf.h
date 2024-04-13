@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:41:09 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/03/27 14:19:30 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:09:07 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*ft_strcat(char *s1, char *s2);
 int		ft_0xatoi(char *str);
 int		ft_atoi(char **str);
 void	ft_switch(int *a, int *b);
+int		is_blank(char c);
 
 void	make_img(t_ptr *ptr);
 void	plot_coord(t_coord d, t_ptr ptr);
