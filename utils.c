@@ -6,7 +6,7 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:48:00 by seojeongpar       #+#    #+#             */
-/*   Updated: 2024/04/12 13:48:15 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/04/13 14:48:33 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,40 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_strjoin(char *a, char *b)
+{
+	char	*ret;
+	int		i;
+	int		j;
+
+	ret = malloc(ft_strlen(a) + ft_strlen(b) + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (*(a + i))
+	{
+		*(ret + i) = *(a + i);
+		i++;
+	}
+	j = 0;
+	while (*(b + j))
+	{
+		*(ret + i + j) = *(b + j);
+		j++;
+	}
+	*(ret + i + j) = '\0';
+	free(a);
+	return (ret);
+}
+
 int	ft_0xatoi(char *str)
 {
 	int	num;
-	int	len;
 
 	if (*str != ',')
 		return (0xFFFFFF);
 	str += 3;
 	num = 0;
-	len = 0;
 	while (*str)
 	{
 		if ('0' <= *str && *str <= '9')
@@ -44,10 +68,8 @@ int	ft_0xatoi(char *str)
 			num = num * 16 + *str - 'a' + 10;
 		else
 			break ;
-		len++;
 		str++;
 	}
-	num = num << (4 * (6 - len));
 	return (num);
 }
 
@@ -71,4 +93,9 @@ int	ft_atoi(char **str)
 		(*str)++;
 	}
 	return (num * flag);
+}
+
+int	is_blank(char c)
+{
+	return ((9 <= c && c <= 13) || (c == 32));
 }

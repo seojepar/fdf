@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:49:50 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/27 14:27:06 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:50:12 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_close(t_ptr *ptr)
 
 	dot = ptr->dots->dot;
 	i = 0;
-	while(i < ptr->dots->x)
+	while (i < ptr->dots->x)
 	{
 		free(dot[i]);
 		i++;

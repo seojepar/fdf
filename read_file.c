@@ -6,37 +6,11 @@
 /*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:26:44 by seojepar          #+#    #+#             */
-/*   Updated: 2024/04/12 13:07:28 by seojeongpar      ###   ########.fr       */
+/*   Updated: 2024/04/13 14:48:46 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-char	*ft_strjoin(char *a, char *b)
-{
-	char	*ret;
-	int		i;
-	int		j;
-
-	ret = malloc(ft_strlen(a) + ft_strlen(b) + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (*(a + i))
-	{
-		*(ret + i) = *(a + i);
-		i++;
-	}
-	j = 0;
-	while (*(b + j))
-	{
-		*(ret + i + j) = *(b + j);
-		j++;
-	}
-	*(ret + i + j) = '\0';
-	free(a);
-	return (ret);
-}
 
 int	buf_init(char **out, char **buf)
 {
@@ -79,11 +53,8 @@ char	*read_file(int fd)
 	return (out);
 }
 
-int is_blank(char c){
-	return ((9 <= c && c <= 13) || (c == 32));
-}
-
-int get_x(char *file, t_dots *info){
+int	get_x(char *file, t_dots *info)
+{
 	int	is_sp;
 	int	exist_flag;
 	int	cnt;
@@ -95,7 +66,8 @@ int get_x(char *file, t_dots *info){
 	{
 		if (is_sp && !is_blank(*file))
 			cnt++;
-		if (exist_flag && *file == '\n'){
+		if (exist_flag && *file == '\n')
+		{
 			info->x = cnt;
 			return (cnt);
 		}

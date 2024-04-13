@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojepar <seojepar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seojeongpark <seojeongpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:48:00 by seojepar          #+#    #+#             */
-/*   Updated: 2024/03/27 14:11:26 by seojepar         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:47:16 by seojeongpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	init_info(t_dots *info)
 		info->dot[i] = (t_coord *)malloc(sizeof(t_coord) * y);
 		if (!info->dot[i])
 		{
-			while(i >= 0)
+			while (i >= 0)
 				free(info->dot[i--]);
 			free(info->dot);
 			free(info);
